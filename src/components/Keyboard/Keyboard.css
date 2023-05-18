@@ -1,0 +1,21 @@
+.button-alpha {
+  font-weight: 700;
+  background: white;
+  height: 37px;
+  width: 40px;
+  align-items: center;
+  border-radius: 99px;
+  border: none;
+  font-size: 25px;
+  transition: 100ms all ease;
+}
+
+.button-alpha:hover {
+  height: 45px;
+  width: 40px;
+  color: white;
+  font-size: xx-large;
+  background-color: black;
+  z-index: 5;
+  /* background-color: rgba(128, 128, 128, 0.548) */
+}

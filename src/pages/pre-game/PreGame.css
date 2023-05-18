@@ -1,0 +1,13 @@
+#mains {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  background-image: url("../../assets/mobilebgsky.png");
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+
+.main-text {
+  font-size: 35px;
+}
