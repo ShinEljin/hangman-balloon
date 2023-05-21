@@ -16,8 +16,7 @@ import Arrow from "../../components/Arrow/Arrow";
 import Balloon from "../../components/Balloon/Balloon";
 import Keyboard from "../../components/Keyboard/Keyboard";
 import Word from "../../components/Word/Word";
-
-// import TimeDuration from "../../TimerDuration/TimeDuration";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 const GameScreen = () => {
   const images = [step0, step1, step2, step3, step4, step5];
@@ -27,12 +26,13 @@ const GameScreen = () => {
   const [wordToGuess, setWordToGuess] = useState();
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [question, setQuestion] = useState("");
+  const [timeRemaining, setTimeRemaining] = useState(null);
 
   const incorrectLetters = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
   );
 
-  const isLoser = incorrectLetters.length >= 5;
+  const isLoser = incorrectLetters.length >= 5 || timeRemaining === 0;
   const isWinner = wordToGuess
     ?.split("")
     .every((letter) => guessedLetters.includes(letter));
@@ -67,6 +67,28 @@ const GameScreen = () => {
       <div className="bg_level_5">
         {/* CONFETTI IF WIN */}
         {isWinner ? <Confetti width={width} height={height} /> : null}
+        <div className="game-timer">
+          <CountdownCircleTimer
+            isPlaying
+            duration={60}
+            colors={["#00c127", "#F7B801", "#F7B801", "#A30000", "#A30000"]}
+            colorsTime={[60, 30, 20, 10, 0]}
+            strokeWidth={12}
+            size={100}
+            strokeLinecap="square"
+            rotation="counterclockwise"
+          >
+            {({ remainingTime }) => {
+              setTimeRemaining(remainingTime);
+              return (
+                <div className="timer">
+                  <div className="value">{remainingTime}</div>
+                </div>
+              );
+            }}
+          </CountdownCircleTimer>
+        </div>
+
         <div className="Hangman">
           {/* QUESTION BOX */}
           <h2 className="questionBox">

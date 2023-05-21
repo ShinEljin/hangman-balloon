@@ -1,7 +1,7 @@
 .cloud_class_level_5 {
   width: 100%;
   background: url("../../assets/bgskyclouds.png") repeat 0 0;
-  animation: slide 15s linear infinite;
+  animation: slide 8s linear infinite;
   box-sizing: border-box;
 }
 
@@ -13,7 +13,7 @@
   height: 100vh;
   margin-bottom: 0px;
   width: 100vw;
-  animation: slide 20s linear infinite;
+  animation: slide 10s linear infinite;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
@@ -23,7 +23,7 @@
     background-position: 0 0;
   }
   to {
-    background-position: 0 1000px;
+    background-position: 0 675px;
   }
 }
 
@@ -127,4 +127,10 @@
 .submit-button:hover {
   background: black;
   color: #fff;
+}
+
+.game-timer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
