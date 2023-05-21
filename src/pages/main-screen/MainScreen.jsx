@@ -10,8 +10,15 @@ import { BsGearFill } from "react-icons/bs";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import Button from "../../components/Button/Button";
 import SquareButton from "../../components/Button/SquareButton";
+import { useNavigate } from "react-router-dom";
 
 export default function MainScreen() {
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    navigate("/pre-game");
+  };
+
   return (
     <div className="cloud__class__1">
       <div className="app-bg">
@@ -46,7 +53,7 @@ export default function MainScreen() {
           </div>
 
           <div id="buttonContainer">
-            <Button title="Start Now" to="/pre-game" />
+            <Button title="Start Now" onClick={onClick} />
           </div>
 
           <div className="lowerBtnContainer">
