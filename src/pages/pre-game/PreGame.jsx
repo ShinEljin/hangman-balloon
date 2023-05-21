@@ -4,28 +4,35 @@ import "./PreGame.css";
 import { useNavigate } from "react-router-dom";
 
 function PreGame() {
-  const { secondsLeft, start } = useCountdown();
-  const navigate = useNavigate();
+  // PAG CLINIC YUNG YES SA ARE YOU SURE TSAKA LANG TO GAGAWIN
+  // const { secondsLeft, start } = useCountdown();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    start(5);
-  }, []);
+  // useEffect(() => {
+  //   start(5);
+  // }, []);
 
-  useEffect(() => {
-    if (secondsLeft === 0) {
-      navigate("/game");
-    }
-  }, [secondsLeft]);
+  // useEffect(() => {
+  //   if (secondsLeft === 0) {
+  //     navigate("/game");
+  //   }
+  // }, [secondsLeft]);
+
+  // return (
+  //   <div id="mains">
+  //     <div>
+  //       <div className="main-text">
+  //         Stage 1 <br />
+  //         Bandages: 5
+  //       </div>
+  //       <div className="main-text">{secondsLeft}</div>
+  //     </div>
+  //   </div>
+  // );
 
   return (
-    <div id="mains">
-      <div>
-        <div className="main-text">
-          Stage 1 <br />
-          Bandages: 5
-        </div>
-        <div className="main-text">{secondsLeft}</div>
-      </div>
+    <div className="cloud__class__1">
+      <div className="app-bg"></div>
     </div>
   );
 }

@@ -1,19 +1,19 @@
 .cloud_class_level_5 {
   width: 100%;
-  background: url("../../assets/mobilebgsky.png") repeat 0 0;
-  animation: slide 8s linear infinite;
+  background: url("../../assets/bgskyclouds.png") repeat 0 0;
+  animation: slide 15s linear infinite;
   box-sizing: border-box;
 }
 
 .bg_level_5 {
-  background-image: url("../../assets/mobilebgland.png");
+  background-image: url("../../assets/bglandrocks.png");
   /* background-position: bottom; */
   background-repeat: repeat-x;
-  background-size: auto 780px;
+  background-size: auto 1080px;
   height: 100vh;
   margin-bottom: 0px;
   width: 100vw;
-  animation: slide 10s linear infinite;
+  animation: slide 20s linear infinite;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
@@ -23,7 +23,7 @@
     background-position: 0 0;
   }
   to {
-    background-position: 0 810px;
+    background-position: 0 1000px;
   }
 }
 

@@ -34,7 +34,7 @@
     transform: translateY(0);
   }
   100% {
-    transform: translateY(-10px);
+    transform: translateY(-20px);
   }
 }
 @keyframes mover {
@@ -42,7 +42,7 @@
     transform: translateY(0);
   }
   100% {
-    transform: translateY(-10px);
+    transform: translateY(-20px);
   }
 }
 
