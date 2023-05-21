@@ -1,43 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
+
 .cloud__class__1 {
-  background: url("../../assets/mobilebgsky.png");
+  background: url("../../assets/bgskyclouds.png");
+  background-size: auto 300px;
 }
 
 .app-bg {
-  background-image: url("../../assets/mobilebgland.png");
+  background-image: url("../../assets/bglandrocks.png");
   background-position: bottom;
   background-repeat: repeat-x;
-  background-size: auto 780px;
+  background-size: auto 1080px;
   height: 100vh;
   margin-bottom: 0px;
   width: 100vw;
 }
 
-.wel__text {
-  font-size: 30px;
-  font-weight: 600;
-  text-align: center;
-}
-
 .balloon {
+  padding-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 #buttonContainer {
-  height: 4vh;
-  margin: 6vh auto;
+  display: flex;
+  padding: 20px;
+  justify-content: center;
 }
 
-#sp {
-  font-size: 25px;
-  font-weight: 600;
-  height: 8vh;
+.main-wrapper {
+  max-width: 1080px;
   margin: auto;
-  line-height: 50px;
-  text-align: center;
-  color: #64c4f0;
-  background-color: #fffafa;
-  border-radius: 20px;
-  cursor: pointer;
+  position: relative;
+  height: 100%;
+}
+
+.lowerBtnContainer {
+  display: flex;
+  gap: 30px;
+  position: absolute;
+  bottom: 50px;
+  right: 20px;
+}
+
+.icon {
+  position: relative;
+  top: 2px;
+}
+
+.uplogo {
+  position: absolute;
+  right: 0;
+}
+
+.carl {
+  position: absolute;
+  left: 250px;
+  bottom: 0;
+}
+
+.house {
+  position: absolute;
+  left: 0;
+  bottom: 400px;
+}
+
+.kevin {
+  position: absolute;
+  left: 100px;
+  bottom: 0;
+}
+
+.russell {
+  position: absolute;
+  right: 250px;
+  bottom: 0;
 }

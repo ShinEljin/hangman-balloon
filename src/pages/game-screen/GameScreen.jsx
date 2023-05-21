@@ -5,12 +5,12 @@ import { useCallback, useEffect, useState } from "react";
 import Confetti from "react-confetti";
 
 import { randWord } from "../../lib/Words";
-import step0 from "../../assets/char-state/0.png";
-import step1 from "../../assets/char-state/1.png";
-import step2 from "../../assets/char-state/2.png";
-import step3 from "../../assets/char-state/3.png";
-import step4 from "../../assets/char-state/4.png";
-import step5 from "../../assets/char-state/5.png";
+import step0 from "../../assets/char-state/5_Balloon.png";
+import step1 from "../../assets/char-state/4_Balloon.png";
+import step2 from "../../assets/char-state/3_Balloon.png";
+import step3 from "../../assets/char-state/2_Balloon.png";
+import step4 from "../../assets/char-state/1_Balloon.png";
+import step5 from "../../assets/char-state/0_Balloon.png";
 
 import Arrow from "../../components/Arrow/Arrow";
 import Balloon from "../../components/Balloon/Balloon";
@@ -75,8 +75,15 @@ const GameScreen = () => {
 
           {/* SCORE */}
           <div className="score">
-            <div style={{ fontSize: "20px", textAlign: "left", width: "50%" }}>
-              Bandages : {5 - incorrectLetters.length}
+            <div
+              style={{
+                fontSize: "30px",
+                textAlign: "left",
+                width: "50%",
+                color: "#AF8B2F",
+              }}
+            >
+              Number of Balloons : {5 - incorrectLetters.length}
             </div>
           </div>
 
