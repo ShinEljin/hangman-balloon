@@ -1,0 +1,341 @@
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Modal Dialog */
+  .modal-dialog {
+    min-width: 520px;
+    margin: 0 auto;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 3rem;
+    
+  }
+
+
+  .modal-content {
+    font-family: "Jua";
+  }
+
+
+  
+  
+
+  /* Modal Header */
+  .modal-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Align items at the start and end */
+    align-items: center;
+    background-repeat: repeat;
+    background-position: center;
+    height: 80px;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    background-image: url("../../assets/woodbg.png");
+
+  }
+
+  .modal-title {
+    flex-grow: 1; /* Allow title to grow and fill available space */
+    text-align: center;
+    font-family: "Jua";
+    color: #af8b2f;
+    font-size: 3rem;
+    margin-left: 50px;
+    text-shadow:
+    -1px -1px 0 #7C5F13, 
+    1px -1px 0 #7C5F13, 
+    -1px 1px 0 #7C5F13,  
+    1px 1px 0 #7C5F13; 
+  }
+  
+    
+
+  /* Modal Body */
+  .modal-body {
+    display: flex;
+    background-color: #4F3224;
+  }
+  
+  /* Modal Left Section */
+  .modal-left {
+    width: 3%;
+    background-image: url("../../assets/woodbgvertical.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+  }
+
+
+  /* Modal Center Section */
+  .modal-center {
+    width: 94%;
+    min-height: 300px;
+    background-color: rgba(207, 170, 75, 1);
+    box-shadow: inset 3px 5px 4px rgba(0, 0, 0, 0.4);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Modal Right Section */
+  .modal-right {
+    width: 3%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("../../assets/woodbgvertical.png");
+    display: flex;
+    align-items: center;
+    position: relative;
+
+  }
+  
+  /* Modal Footer */
+  .modal-footer {
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    background-repeat: repeat;
+    background-position: center;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    background-image: url("../../assets/woodbg.png");
+    min-height: 20px;
+
+  }
+
+  
+ /* leaves CSs */
+  .leaf-left{
+    position: absolute; 
+    left: -50px; 
+    height: 190px;
+
+  }
+
+  .leaf-left-categories{
+    position: absolute; 
+    left: -50px; 
+    top: 0px ;
+    height: 190px;
+
+  }
+
+  .leaf-right{
+    position: absolute; 
+    height: 210px;
+    right: -50px;
+    margin-bottom: 80px;
+
+  }
+
+  .leaf-right-categories{
+    position: absolute; 
+    height: 210px;
+    right: -40px;
+    bottom: -160px;
+    z-index: 1;
+
+  }
+
+  .settings-Container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  
+  }
+
+  .content-tagtitle{
+    font-family: "Jua";
+    font-size: 3rem;
+    color: #7C5F13;
+    margin: 10px;
+  }
+
+  .inner-Container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-items: center;
+  }
+  .checkboxes{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+
+  }
+  .settings-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #813C1C;
+    border-radius: 4px;
+    background: linear-gradient(180deg, rgba(163, 127, 37, 0.19) 0%, #CF7B4B 100%);
+    margin: 10px;
+  
+    &:checked {
+      background-image: url(../../assets/checkimg.png);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+ 
+  
+  }
+
+  .settings-checkbox:hover{
+    background: rgba(255, 255, 255, 0.4);
+
+  }
+
+
+
+  .howto-Container{
+    display: flex;
+    flex-direction: row;
+    margin: 40px ;
+    max-width: 850px;
+  }
+  
+  .step1-img{
+    margin-right: 20px;
+    
+  }
+
+  .step2-img{
+    margin-right: 20px;
+
+  }
+  .step3-img{
+    height: 100px;
+    margin-top: 60px;
+    margin-right: 20px;
+    
+  }
+  
+  .step-instruc{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-family: "Jua";
+    font-size: 2rem;
+    color: #ffff;
+    text-shadow:
+    -1px -1px 0 #7C5F13, 
+    1px -1px 0 #7C5F13, 
+    -1px 1px 0 #7C5F13,  
+    1px 1px 0 #7C5F13; 
+  }
+
+  .stepper-Container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    
+  }
+
+  
+  .iconHowto {
+    color: #fff;
+
+  }
+  
+  .stepper-title{
+    text-align: center;
+    font-family: "Jua";
+    color: #af8b2f;
+    font-size: 2rem;
+    font-weight: 400;
+    text-shadow:
+    -1px -1px 0 #36241C, 
+    1px -1px 0 #36241C, 
+    -1px 1px 0 #36241C,  
+    1px 1px 0 #36241C; 
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+.stepper-hide{
+  opacity: 0;
+}
+
+.category-Container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 40px;
+}
+.category-checkbox{
+  display: flex; 
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.category-radioLabel > input + div {
+  border: 1px solid grey;
+  text-align: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(163, 127, 37, 0.19) 0%, #CF7B4B 100%);
+  border: 4px solid #813C1C;
+  border-radius: 10px;
+  width: 120px;
+  height: 120px;
+  margin: 20px;
+}
+
+.category-radioLabel > input + div:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.category-radioLabel > input {
+  visibility: hidden;
+  position: absolute;
+}
+
+.category-radioLabel {
+  cursor: pointer;
+}
+
+.category-tagtitle{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Jua";
+  font-size: 2rem;
+}
+
+.category-radioLabel > input:checked + div {
+  border: 4px solid #813C1C;
+  background: #FFD600;
+
+}
+
+.select-container{
+  width: 40%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}

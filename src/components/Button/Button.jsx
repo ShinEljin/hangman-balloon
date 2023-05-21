@@ -1,21 +1,20 @@
 import "./Button.css";
-import { Link } from "react-router-dom";
 
-const Button = (props) => {
+const Button = ({ onClick, title }) => {
   return (
-    <div className="outerBtn">
-      <div className="innerBtn">
+    <div className="outerBtn" >
+      <div className="innerBtn" onClick={onClick}
+>
         <div className="btn">
-          <Link
-            to={props.to}
+          <button
             style={{
               textDecoration: "none",
               fontFamily: "Jua",
               color: "black",
             }}
           >
-            {props.title}
-          </Link>
+            {title}
+          </button>
         </div>
       </div>
     </div>
