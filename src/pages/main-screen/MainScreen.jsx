@@ -10,15 +10,56 @@ import { BsGearFill } from "react-icons/bs";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import Button from "../../components/Button/Button";
 import SquareButton from "../../components/Button/SquareButton";
+import ModalComponent from "../../components/Modal/ModalComponent";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 
 export default function MainScreen() {
   const navigate = useNavigate();
 
-  const onClick = () => {
-    navigate("/pre-game");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+
+  function openModal(content) {
+    setModalOpen(true);
+    setModalContent(content);
+
+  }
+
+  function closeModal() {
+    setModalOpen(false);
+    setModalContent("");
+
+  }
+
+  const navigateToPreGame = () => {
+    navigate('/pre-game');
   };
 
+  useEffect(() => {
+    const audio = new Audio("./sounds/tempbgmusic.mp3");
+
+    const handleAudioEnded = () => {
+      audio.currentTime = 0;
+      audio.play();
+    };
+
+    audio.addEventListener("ended", handleAudioEnded);
+    audio.volume = 0.4; //Adjust volume
+
+    audio.play();
+
+    return () => {
+      audio.removeEventListener("ended", handleAudioEnded);
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, []);
+
+
+  
   return (
     <div className="cloud__class__1">
       <div className="app-bg">
@@ -53,15 +94,27 @@ export default function MainScreen() {
           </div>
 
           <div id="buttonContainer">
-            <Button title="Start Now" onClick={onClick} />
-          </div>
-
-          <div className="lowerBtnContainer">
-            <SquareButton content={<BsGearFill size={30} className="icon" />} />
-            <SquareButton
-              content={<AiOutlineQuestionCircle size={30} className="icon" />}
+            <Button title="Start Now" 
+            onClick={() => openModal("categories")}
             />
           </div>
+          <div className="lowerBtnContainer">
+          <SquareButton
+            content={<BsGearFill size={30} className="icon" />}
+            onClick={() => openModal("settings")}
+          />
+          <SquareButton
+            content={<AiOutlineQuestionCircle size={30} className="icon" />}
+            onClick={() => openModal("how to")}
+          />
+          <ModalComponent
+            modalOpen={modalOpen}
+            closeModal={closeModal}
+            modalContent={modalContent}
+            navigateToPreGame={navigateToPreGame}
+
+          />
+        </div>
         </div>
       </div>
     </div>

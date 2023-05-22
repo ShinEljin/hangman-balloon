@@ -27,6 +27,7 @@
   border-radius: 40px;
   padding: 10px;
   background-color: #452e25;
+  
 }
 
 /* ---- */
@@ -70,4 +71,22 @@
 .squareBtn:hover {
   background-image: linear-gradient(#e0c685, #fae8bc);
   cursor: pointer;
+}
+
+.closeBtn {
+  color: #FF6262;
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.closeBtn:hover {
+  opacity: 0.8;
+}
+
+
+.innerForwardButton {
+  border-radius: 30px;
+  padding: 8px;
+  background: linear-gradient(0deg, #36241C, #36241C),
 }

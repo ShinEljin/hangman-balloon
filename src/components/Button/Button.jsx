@@ -2,8 +2,9 @@ import "./Button.css";
 
 const Button = ({ onClick, title }) => {
   return (
-    <div className="outerBtn">
-      <div className="innerBtn">
+    <div className="outerBtn" >
+      <div className="innerBtn" onClick={onClick}
+>
         <div className="btn">
           <button
             style={{
