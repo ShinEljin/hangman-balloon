@@ -1,6 +1,6 @@
 .cloud_class_level_5 {
   width: 100%;
-  background: url("../../assets/bgskyclouds.gif") repeat 0 0;
+  background: url("../../assets/bgskyclouds.png") repeat 0 0;
   animation: slide 8s linear infinite;
   box-sizing: border-box;
 }
