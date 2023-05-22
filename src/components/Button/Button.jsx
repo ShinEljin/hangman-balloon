@@ -12,6 +12,7 @@ const Button = ({ onClick, title }) => {
               fontFamily: "Jua",
               color: "black",
             }}
+            onClick={onClick}
           >
             {title}
           </button>

@@ -60,7 +60,6 @@ export default function MainScreen() {
 
 
   
-  console.log(modalOpen);
   return (
     <div className="cloud__class__1">
       <div className="app-bg">
