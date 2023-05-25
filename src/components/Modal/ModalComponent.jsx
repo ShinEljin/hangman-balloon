@@ -6,13 +6,11 @@ import CategoriesModalContent from "./CategoriesModalContent";
 import HowToStepper from "./HowtoSteppers";
 import Button from "../Button/Button";
 import { useState } from 'react';
-import SoundEffectPlayer from "../AudioManager.jsx/SoundEffectPlayer";
 
 export default function ModalComponent(props) {
   const [currentStep, setCurrentStep] = useState(1);
+
   
-
-
   return (
     <>
       {props.modalOpen && (
@@ -38,12 +36,7 @@ export default function ModalComponent(props) {
                    setIsMusicEnabled={props.setIsMusicEnabled}
                    
                   />}
-                  {props.modalContent === "how to" && 
-                  <HowtoModalContent 
-                  currentStep={currentStep}
-              
-
-                   />}
+                  {props.modalContent === "how to" && <HowtoModalContent currentStep={currentStep} />}
                   {props.modalContent === "categories" && <CategoriesModalContent />}
                 </div>
                 <div className="modal-right">
@@ -53,12 +46,7 @@ export default function ModalComponent(props) {
               </div>
               <div className="modal-footer">
                 {props.modalContent === "how to" && (
-                  <HowToStepper currentStep={currentStep} setCurrentStep={setCurrentStep}
-                  isSoundEnabled={isSoundEnabled}
-                  setIsSoundEnabled={setIsSoundEnabled}
-                  currentMusicId={currentMusicId}
-                  setCurrentMusicId={setCurrentMusicId}
-                  handleSoundEffect={handleSoundEffect} />
+                  <HowToStepper currentStep={currentStep} setCurrentStep={setCurrentStep} />
                 )}
                  {props.modalContent === "categories" && (
                   <div className="select-container">

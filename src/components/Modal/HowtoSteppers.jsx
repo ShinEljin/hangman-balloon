@@ -10,6 +10,7 @@ export default function HowToStepper(props) {
     if (currentStep > 1) {
       setCurrentStep(prevStep => prevStep - 1);
     }
+    
   };
 
   const handleNextClick = () => {
