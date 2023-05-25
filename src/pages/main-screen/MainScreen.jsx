@@ -47,7 +47,6 @@ export default function MainScreen() {
     };
 
     audio.addEventListener("ended", handleAudioEnded);
-    audio.volume = 0.4; //Adjust volume
 
     audio.play();
 
