@@ -30,7 +30,12 @@ export default function ModalComponent(props) {
                   <img className={`leaf-left ${props.modalContent === "categories" ? 'leaf-left-categories' : ''}`}src="/leaf-images/left-leaf.png" alt="image not found" />
                 </div>
                 <div className="modal-center">
-                  {props.modalContent === "settings" && <SettingsModalContent />}
+                  {props.modalContent === "settings" && 
+                  <SettingsModalContent
+                   isMusicEnabled={props.isMusicEnabled}
+                   setIsMusicEnabled={props.setIsMusicEnabled}
+                   
+                  />}
                   {props.modalContent === "how to" && <HowtoModalContent currentStep={currentStep} />}
                   {props.modalContent === "categories" && <CategoriesModalContent />}
                 </div>
