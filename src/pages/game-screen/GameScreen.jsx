@@ -37,7 +37,7 @@ const GameScreen = () => {
     ?.split("")
     .filter((letter) => letter !== " ")
     .every((letter) => guessedLetters.includes(letter));
-  console.log(isWinner);
+
   const addGuessedLetter = useCallback(
     (letter) => {
       if (guessedLetters.includes(letter) || isLoser || isWinner) return;
