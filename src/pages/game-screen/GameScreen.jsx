@@ -4,19 +4,19 @@ import "./GameScreen.css";
 import { useCallback, useEffect, useState } from "react";
 import Confetti from "react-confetti";
 
-import { randWord } from "../../lib/Words";
-import step0 from "../../assets/char-state/5_Balloon.png";
-import step1 from "../../assets/char-state/4_Balloon.png";
-import step2 from "../../assets/char-state/3_Balloon.png";
-import step3 from "../../assets/char-state/2_Balloon.png";
-import step4 from "../../assets/char-state/1_Balloon.png";
 import step5 from "../../assets/char-state/0_Balloon.png";
+import step4 from "../../assets/char-state/1_Balloon.png";
+import step3 from "../../assets/char-state/2_Balloon.png";
+import step2 from "../../assets/char-state/3_Balloon.png";
+import step1 from "../../assets/char-state/4_Balloon.png";
+import step0 from "../../assets/char-state/5_Balloon.png";
+import { randWord } from "../../lib/Words";
 
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import Arrow from "../../components/Arrow/Arrow";
 import Balloon from "../../components/Balloon/Balloon";
 import Keyboard from "../../components/Keyboard/Keyboard";
 import Word from "../../components/Word/Word";
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 const GameScreen = () => {
   const images = [step0, step1, step2, step3, step4, step5];
@@ -129,7 +129,7 @@ const GameScreen = () => {
                 activeLetters={guessedLetters.filter((letter) =>
                   wordToGuess.includes(letter)
                 )}
-                inactiveLetters={incorrectLetters}
+                inactiveLetters={guessedLetters}
                 addGuessedLetter={addGuessedLetter}
               />
               {/* {gameStat === 1 ? (

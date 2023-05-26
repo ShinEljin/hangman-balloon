@@ -11,8 +11,7 @@
 }
 
 .button-alpha:hover {
-  height: 45px;
-  width: 40px;
+  transform: scale(1.2);
   color: white;
   font-size: xx-large;
   background-color: black;
