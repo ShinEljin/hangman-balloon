@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import "./PreGame.css";
-import "../main-screen/MainScreen.css";
-import { useNavigate } from "react-router-dom";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { useNavigate } from "react-router-dom";
+import "../main-screen/MainScreen.css";
+import "./PreGame.css";
 
 function PreGame() {
   // PAG CLINIC YUNG YES SA ARE YOU SURE TSAKA LANG TO GAGAWIN
@@ -20,7 +20,7 @@ function PreGame() {
             {/* {secondsLeft} */}
             <CountdownCircleTimer
               isPlaying
-              duration={5}
+              duration={3}
               colors={[
                 "#CFAA4B",
                 "#CFAA4B",
