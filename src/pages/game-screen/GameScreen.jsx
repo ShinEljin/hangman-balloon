@@ -1,22 +1,22 @@
 /* eslint-disable react/prop-types */
 import "./GameScreen.css";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import Confetti from "react-confetti";
 
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { categoryContext } from "../../App";
 import step5 from "../../assets/char-state/0_Balloon.png";
 import step4 from "../../assets/char-state/1_Balloon.png";
 import step3 from "../../assets/char-state/2_Balloon.png";
 import step2 from "../../assets/char-state/3_Balloon.png";
 import step1 from "../../assets/char-state/4_Balloon.png";
 import step0 from "../../assets/char-state/5_Balloon.png";
-import { randWord } from "../../lib/Words";
-
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import Arrow from "../../components/Arrow/Arrow";
 import Balloon from "../../components/Balloon/Balloon";
 import Keyboard from "../../components/Keyboard/Keyboard";
 import Word from "../../components/Word/Word";
+import { randWord } from "../../lib/Words";
 
 const GameScreen = () => {
   const images = [step0, step1, step2, step3, step4, step5];
@@ -27,32 +27,31 @@ const GameScreen = () => {
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [question, setQuestion] = useState("");
   const [timeRemaining, setTimeRemaining] = useState(null);
+  const { selectedOption } = useContext(categoryContext);
 
   const incorrectLetters = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
   );
-
+  console.log(wordToGuess);
   const isLoser = incorrectLetters.length >= 5 || timeRemaining === 0;
   const isWinner = wordToGuess
     ?.split("")
+    .filter((letter) => letter !== " ")
     .every((letter) => guessedLetters.includes(letter));
 
   const addGuessedLetter = useCallback(
     (letter) => {
       if (guessedLetters.includes(letter) || isLoser || isWinner) return;
-
       setGuessedLetters((currentLetters) => [...currentLetters, letter]);
     },
     [guessedLetters, isWinner, isLoser]
   );
 
   useEffect(() => {
-    const rp = randWord();
-    console.log(rp);
-    setWordToGuess(rp.phrase.toUpperCase());
-    setQuestion(rp.ques);
+    const rp = randWord(selectedOption);
+    setWordToGuess(rp.word.toUpperCase());
+    setQuestion(rp.Hint);
   }, []);
-
   useEffect(() => {
     if (isLoser) {
       document.querySelector(".cloud_class_level_5").style.animationDirection =
@@ -90,12 +89,6 @@ const GameScreen = () => {
         </div>
 
         <div className="Hangman">
-          {/* QUESTION BOX */}
-          <h2 className="questionBox">
-            <div style={{ textSize: "15px" }}>{question}</div>
-          </h2>
-
-          {/* SCORE */}
           <div className="score">
             <div
               style={{
@@ -113,7 +106,12 @@ const GameScreen = () => {
             {/* part1 baloon */}
             <Balloon isLoser={isLoser} img={images[incorrectLetters.length]} />
 
-            {/* part 2 phrase */}
+            <div className="questionBox">
+              <div>
+                <h2>Hint: {question}</h2>
+                <h3>(Category - {selectedOption})</h3>
+              </div>
+            </div>
             <div>
               <Word
                 reveal={isLoser}
@@ -123,7 +121,7 @@ const GameScreen = () => {
             </div>
 
             {/* part 3 keypad */}
-            <div style={{ marginTop: "20px" }}>
+            <div className="Keyboard-Container">
               <Keyboard
                 removeFromScreen={isWinner || isLoser}
                 activeLetters={guessedLetters.filter((letter) =>

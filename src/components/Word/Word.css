@@ -1,0 +1,19 @@
+.WordByWord {
+  border-radius: 10%;
+  border-bottom: 5px solid #4f3222;
+}
+
+.space {
+  padding: 8px;
+}
+
+.WordByWord > span {
+  padding: 10px 15px;
+  font-size: min(2.5rem, 4.8vw);
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+.WordByWord > span[data-letter="M"] {
+  border-bottom: none;
+}

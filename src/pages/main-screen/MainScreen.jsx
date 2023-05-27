@@ -1,22 +1,20 @@
-import "./MainScreen.css";
 import dogBalloon from "../../assets/Dog_Balloon.png";
 import logo from "../../assets/UP_Logo.png";
 import Carl from "../../assets/characters/Carl.png";
 import House from "../../assets/characters/House.png";
 import Kevin from "../../assets/characters/Kevin.png";
 import Russell from "../../assets/characters/Russell.png";
+import "./MainScreen.css";
 
-import { BsGearFill } from "react-icons/bs";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
-import Button from "../../components/Button/Button";
-import SquareButton from "../../components/Button/SquareButton";
-import ModalComponent from "../../components/Modal/ModalComponent";
 import { useState } from "react";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { BsGearFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import BgMusicPlayer from "../../components/AudioManager.jsx/BgMusicPlayer";
 import SoundEffectPlayer from "../../components/AudioManager.jsx/SoundEffectPlayer";
-
-
+import Button from "../../components/Button/Button";
+import SquareButton from "../../components/Button/SquareButton";
+import ModalComponent from "../../components/Modal/ModalComponent";
 
 export default function MainScreen() {
   const navigate = useNavigate();
@@ -26,7 +24,6 @@ export default function MainScreen() {
   const [isMusicEnabled, setIsMusicEnabled] = useState(true);
   const [isSoundEnabled, setIsSoundEnabled] = useState(false);
   const [currentMusicId, setCurrentMusicId] = useState("");
-
 
   function openModal(content) {
     setModalOpen(true);
@@ -48,12 +45,10 @@ export default function MainScreen() {
     setIsMusicEnabled(!isMusicEnabled);
   };
 
-
   const handleSoundEffect = (musicId) => {
     setIsSoundEnabled(!isSoundEnabled);
     setCurrentMusicId(musicId);
   };
-  
 
   return (
     <div className="cloud__class__1">
@@ -74,23 +69,27 @@ export default function MainScreen() {
               alt="Carl"
               onClick={() => handleSoundEffect("Carl")}
             />
-          
           </div>
 
           <div className="house">
-            <img src={House} height="200px" alt="House" 
-            />
+            <img src={House} height="200px" alt="House" />
           </div>
 
           <div className="kevin">
-            <img src={Kevin} height="350px" alt="Kevin"
-            onClick={() => handleSoundEffect("Bird")}
-             />
+            <img
+              src={Kevin}
+              height="350px"
+              alt="Kevin"
+              onClick={() => handleSoundEffect("Bird")}
+            />
           </div>
 
           <div className="russell">
-            <img src={Russell} height="200px" alt="Russell" 
-            onClick={() => handleSoundEffect("Russell")}
+            <img
+              src={Russell}
+              height="200px"
+              alt="Russell"
+              onClick={() => handleSoundEffect("Russell")}
             />
           </div>
 
@@ -122,10 +121,10 @@ export default function MainScreen() {
             />
             <SquareButton
               content={<AiOutlineQuestionCircle size={30} className="icon" />}
-              onClick={() => {openModal("how to");
-              handleSoundEffect("Click");
-
-            }}
+              onClick={() => {
+                openModal("how to");
+                handleSoundEffect("Click");
+              }}
             />
             <ModalComponent
               modalOpen={modalOpen}
@@ -136,11 +135,11 @@ export default function MainScreen() {
               setIsMusicEnabled={setIsMusicEnabled}
             />
             {isSoundEnabled && (
-            <SoundEffectPlayer
-              isSoundEnabled={isSoundEnabled}
-              musicId={currentMusicId}
-            />
-          )}
+              <SoundEffectPlayer
+                isSoundEnabled={isSoundEnabled}
+                musicId={currentMusicId}
+              />
+            )}
           </div>
         </div>
       </div>
