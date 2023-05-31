@@ -32,31 +32,41 @@
 }
 
 .questionBox {
-  height: auto;
-  width: 60%;
-  font-size: 20px;
-  padding-top: 15px;
-  font-weight: 500;
+  margin: 0 auto;
+  display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 40px;
-  background-color: rgba(211, 211, 211, 0.2);
+  width: 50%;
+  background-color: #c9a852;
+  background-image: url("../../assets/woodbg.png");
+  height: 90%;
+
+  border-radius: 65px;
+}
+.questionBox > div {
+  background-color: #c9a852;
+  padding: 2% 5%;
+  margin: 3.5%;
+  width: 88%;
+
+  border-radius: 45px;
+  border: 8px solid #d6be65;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 25px 30px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 25px -25px inset;
 }
 
-.questionBox {
-  font-family: Arial, Helvetica, sans-serif;
-  position: relative;
-  top: 1vh;
-  height: auto;
-  width: 90%;
-  padding-top: 15px;
-  margin: 0 auto 0 auto;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
-  background-color: rgba(211, 211, 211, 0.3);
+.questionBox > div > h2 {
+  font-size: min(2rem, 4.5vw);
+  color: white;
+  text-shadow: -1px 1px 2px #7c5f13, 1px 3px 2px #7c5f13, 1px -1px 0 #7c5f13,
+    -1px -1px 0 #7c5f13;
 }
 
+.questionBox > div > h3 {
+  font-size: min(1.8rem, 3.5vw);
+  margin-top: 3%;
+  color: #7c5f13;
+}
 .words {
   text-align: center;
   display: grid;
@@ -81,9 +91,9 @@
 .maingrid {
   justify-content: center;
   display: grid;
+  height: 80vh;
   grid-template-rows: auto auto auto auto;
-  grid-template-columns: 405px;
-  /* border: red solid; */
+  grid-template-columns: 100%;
 }
 
 @media only screen and (max-width: 600px) {
@@ -133,4 +143,14 @@
   position: absolute;
   top: 20px;
   right: 20px;
+}
+
+.Keyboard-Container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2%;
+}
+
+.Keyboard-Container > div {
+  height: 50%;
 }

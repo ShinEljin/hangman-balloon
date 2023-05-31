@@ -1,31 +1,30 @@
-/* eslint-disable react/prop-types */
 import "./Keyboard.css";
 
-const Keyboard = ({
-  removeFromScreen = false,
-  activeLetters,
-  inactiveLetters,
-  addGuessedLetter,
-}) => {
+const KeyboardContainer = ({ inactiveLetters, addGuessedLetter }) => {
+  const rows = [
+    ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+    ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+    ["Z", "X", "C", "V", "B", "N", "M"],
+  ];
+
   return (
     <>
-      {!removeFromScreen &&
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map((letter) => {
-          const isActive = activeLetters.includes(letter);
-          const isInactive = inactiveLetters.includes(letter);
-          return (
+      {rows.map((row, index) => (
+        <div key={index}>
+          {row.map((letter) => (
             <button
-              value={letter}
               key={letter}
               className="button-alpha"
               onClick={() => addGuessedLetter(letter)}
-              disabled={isInactive || isActive}
+              disabled={inactiveLetters.includes(letter)}
             >
               {letter}
             </button>
-          );
-        })}
+          ))}
+        </div>
+      ))}
     </>
   );
 };
-export default Keyboard;
+
+export default KeyboardContainer;
