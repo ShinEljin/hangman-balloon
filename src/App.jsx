@@ -3,9 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import GameScreen from "./pages/game-screen/GameScreen";
 import MainScreen from "./pages/main-screen/MainScreen";
 import PreGame from "./pages/pre-game/PreGame";
-import SoundEffectPlayer from "./components/AudioManager.jsx/SoundEffectPlayer";
+import SoundEffectPlayer from "./components/AudioManager/SoundEffectPlayer";
 
-import BgMusicPlayer from "./components/AudioManager.jsx/BgMusicPlayer";
+import BgMusicPlayer from "./components/AudioManager/BgMusicPlayer";
 
 export const categoryContext = createContext();
 export const soundStateContext = createContext();
