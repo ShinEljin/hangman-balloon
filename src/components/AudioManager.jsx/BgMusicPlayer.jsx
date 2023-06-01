@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import useSound from "use-sound";
 import Home from "../../assets/soundFx/Homebgmusic.mp3";
 import PreGame from "../../assets/soundFx/Pregame.mp3";
-import InGame from "../../assets/soundFx/Ingame.mp3";
+import InGame from "../../assets/soundFx/IngameBG.mp3";
 
 const soundSources = {
   Home: {
