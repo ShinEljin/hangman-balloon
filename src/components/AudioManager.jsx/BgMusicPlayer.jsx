@@ -1,21 +1,62 @@
-import { useEffect } from "react";
-import { Howl } from "howler";
-import BgMusic from "../../assets/soundFx/bgmusic.mp3";
+import { useEffect, useRef } from "react";
+import useSound from "use-sound";
+import Home from "../../assets/soundFx/Homebgmusic.mp3";
+import PreGame from "../../assets/soundFx/Pregame.mp3";
+import InGame from "../../assets/soundFx/Ingame.mp3";
 
-const bgMusic = new Howl({
-  src: [BgMusic],
-  volume: 0.3,
-  loop: true,
-});
+const soundSources = {
+  Home: {
+    src: Home,
+    volume: 0.3
+  },
+  PreGame: {
+    src: PreGame,
+    volume: 0.5
+  },
+  InGame: {
+    src: InGame,
+    volume: 0.2
+  },
+  Remove: {
+    src: "",
+  }
+};
 
-export default function BgMusicPlayer({ isMusicEnabled }) {
+export default function BgMusicPlayer({ isMusicEnabled, musicId }) {
+  const { src, volume } = soundSources[musicId] || {}; 
+
+  const [play, { pause }] = useSound(src, {
+    volume,
+    loop: true,
+    interrupt: true
+  });
+
+  const currentMusicIdRef = useRef(null);
+
+  useEffect(() => {
+    Object.values(soundSources).forEach(({ src }) => {
+      const audio = new Audio(src);
+      audio.preload = "auto";
+    });
+  }, []);
+
   useEffect(() => {
     if (isMusicEnabled) {
-      bgMusic.play();
+      if (currentMusicIdRef.current && currentMusicIdRef.current !== musicId) {
+        pause(); 
+      }
+      currentMusicIdRef.current = musicId; 
+      play();
     } else {
-      bgMusic.pause();
+      pause();
     }
-  }, [isMusicEnabled]);
+
+
+    return () => {
+      pause();
+      currentMusicIdRef.current = null; 
+    };
+  }, [isMusicEnabled, musicId, play, pause]);
 
   return null;
 }

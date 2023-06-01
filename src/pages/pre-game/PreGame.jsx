@@ -3,10 +3,27 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { useNavigate } from "react-router-dom";
 import "../main-screen/MainScreen.css";
 import "./PreGame.css";
+import { soundStateContext } from "../../App";
+import { useContext } from "react";
 
 function PreGame() {
-  // PAG CLINIC YUNG YES SA ARE YOU SURE TSAKA LANG TO GAGAWIN
+  const { handleBgMusicToggle, isMusicEnabled } = useContext(soundStateContext);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (isMusicEnabled) {
+      handleBgMusicToggle("PreGame");
+    }
+    return () => {
+      handleBgMusicToggle("");
+    };
+  }, [handleBgMusicToggle, isMusicEnabled]);
+
+  
+  const onTimerComplete = () => {
+    navigate("/game");
+  };
+  
   return (
     <>
       <div className="dim_gray" />
@@ -17,7 +34,6 @@ function PreGame() {
             <span className="balloon-text">Balloons: 5</span>
           </div>
           <div className="main-text">
-            {/* {secondsLeft} */}
             <CountdownCircleTimer
               isPlaying
               duration={3}
@@ -34,8 +50,13 @@ function PreGame() {
               trailColor="#4F3222"
               strokeLinecap="square"
               rotation="counterclockwise"
+              onComplete={onTimerComplete}
             >
-              {renderTime}
+              {({ remainingTime }) => (
+                <div className="timer">
+                  <div className="value">{remainingTime}</div>
+                </div>
+              )}
             </CountdownCircleTimer>
           </div>
         </div>
@@ -43,21 +64,5 @@ function PreGame() {
     </>
   );
 }
-
-const renderTime = ({ remainingTime }) => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (remainingTime === 0) {
-      navigate("/game");
-    }
-  }, [remainingTime]);
-
-  return (
-    <div className="timer">
-      <div className="value">{remainingTime}</div>
-    </div>
-  );
-};
 
 export default PreGame;
