@@ -2,7 +2,7 @@ import QuestionCategories from "../assets/QuestionsAndAnswers/QuestionCategories
 
 export function randWord(Category) {
   let marked = [];
-  const generateIndex = Math.floor(
+  let generateIndex = Math.floor(
     Math.random() * QuestionCategories[Category].length
   );
 
