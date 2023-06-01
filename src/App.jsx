@@ -4,6 +4,7 @@ import GameScreen from "./pages/game-screen/GameScreen";
 import MainScreen from "./pages/main-screen/MainScreen";
 import PreGame from "./pages/pre-game/PreGame";
 import SoundEffectPlayer from "./components/AudioManager.jsx/SoundEffectPlayer";
+
 import BgMusicPlayer from "./components/AudioManager.jsx/BgMusicPlayer";
 
 export const categoryContext = createContext();
@@ -15,60 +16,58 @@ function App() {
     setSelectedOption: setSelectedOption,
   };
 
-const [isMusicEnabled, setIsMusicEnabled] = useState(false);
-const [isSoundEnabled, setIsSoundEnabled] = useState(false);
-const [isSoundEffectEnabled, setIsSoundEffectEnabled] = useState(true);
-const [currentSoundId, setCurrentSoundId] = useState("");
-const [currentMusicId, setCurrentMusicId] = useState("");
+  const [isMusicEnabled, setIsMusicEnabled] = useState(false);
+  const [isSoundEnabled, setIsSoundEnabled] = useState(false);
+  const [isSoundEffectEnabled, setIsSoundEffectEnabled] = useState(true);
+  const [currentSoundId, setCurrentSoundId] = useState("");
+  const [currentMusicId, setCurrentMusicId] = useState("");
 
-
-const handleBgMusicToggle = (musicId) => {
+  const handleBgMusicToggle = (musicId) => {
     setIsMusicEnabled(true);
     setCurrentMusicId(musicId);
-};
+  };
 
-const handleSoundEffect = (musicId) => {
-  if (currentSoundId === musicId) {
-    setIsSoundEnabled(!isSoundEnabled);
-  } else {
-    setIsSoundEnabled(true);
-    setCurrentSoundId(musicId);
-  }
-};
-  
+  const handleSoundEffect = (musicId) => {
+    if (currentSoundId === musicId) {
+      setIsSoundEnabled(!isSoundEnabled);
+    } else {
+      setIsSoundEnabled(true);
+      setCurrentSoundId(musicId);
+    }
+  };
+
   return (
     <categoryContext.Provider value={selectedOptionObject}>
-       <soundStateContext.Provider
+      <soundStateContext.Provider
         value={{
           setIsSoundEffectEnabled,
           isSoundEffectEnabled,
           handleSoundEffect,
-          handleBgMusicToggle, 
+          handleBgMusicToggle,
           currentSoundId,
           isMusicEnabled,
           setIsMusicEnabled,
         }}
       >
         {isMusicEnabled && (
-              <BgMusicPlayer
-              isMusicEnabled={isMusicEnabled}
-              musicId={currentMusicId}
-            />
+          <BgMusicPlayer
+            isMusicEnabled={isMusicEnabled}
+            musicId={currentMusicId}
+          />
         )}
-    
-      <Routes>
-        <Route path="/pre-game" element={<PreGame />} />
-        <Route path="/" element={<MainScreen />} />
-        <Route path="/game" element={<GameScreen />} />
-      </Routes>
+
+        <Routes>
+          <Route path="/pre-game" element={<PreGame />} />
+          <Route path="/" element={<MainScreen />} />
+          <Route path="/game" element={<GameScreen />} />
+        </Routes>
         {isSoundEnabled && (
           <SoundEffectPlayer
-              isSoundEnabled={isSoundEnabled}
-              musicId={currentSoundId}
-              isSoundEffectEnabled={isSoundEffectEnabled}
-            />
-          )}
-          
+            isSoundEnabled={isSoundEnabled}
+            musicId={currentSoundId}
+            isSoundEffectEnabled={isSoundEffectEnabled}
+          />
+        )}
       </soundStateContext.Provider>
     </categoryContext.Provider>
   );
