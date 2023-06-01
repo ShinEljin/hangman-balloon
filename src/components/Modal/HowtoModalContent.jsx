@@ -4,6 +4,7 @@ export default function HowtoModalContent(props) {
 
       switch (props.currentStep) {
         case 1:
+          
           return (
             <div className="howto-Container">
               <div>

@@ -10,29 +10,31 @@ import { useState } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { BsGearFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import BgMusicPlayer from "../../components/AudioManager.jsx/BgMusicPlayer";
-import SoundEffectPlayer from "../../components/AudioManager.jsx/SoundEffectPlayer";
 import Button from "../../components/Button/Button";
 import SquareButton from "../../components/Button/SquareButton";
 import ModalComponent from "../../components/Modal/ModalComponent";
+import { soundStateContext } from "../../App";
+import { useContext, useEffect } from "react";
 
 export default function MainScreen() {
   const navigate = useNavigate();
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
-  const [isMusicEnabled, setIsMusicEnabled] = useState(true);
-  const [isSoundEnabled, setIsSoundEnabled] = useState(false);
-  const [currentMusicId, setCurrentMusicId] = useState("");
+  const { handleSoundEffect, handleBgMusicToggle } = useContext(soundStateContext);
+
+  useEffect(() => {
+    return () => {
+      handleBgMusicToggle("Home"); 
+    };
+  }, []);
 
   function openModal(content) {
-    setModalOpen(true);
     setModalContent(content);
+    setModalOpen(true);
   }
 
   function closeModal() {
-    setIsSoundEnabled(!isSoundEnabled);
-    setCurrentMusicId("Click");
     setModalOpen(false);
     setModalContent("");
   }
@@ -41,22 +43,11 @@ export default function MainScreen() {
     navigate("/pre-game");
   };
 
-  const handleBgMusicToggle = () => {
-    setIsMusicEnabled(!isMusicEnabled);
-  };
-
-  const handleSoundEffect = (musicId) => {
-    setIsSoundEnabled(!isSoundEnabled);
-    setCurrentMusicId(musicId);
-  };
 
   return (
     <div className="cloud__class__1">
-      <BgMusicPlayer
-        isMusicEnabled={isMusicEnabled}
-        onClick={handleBgMusicToggle}
-      />
-      <div className="app-bg">
+  
+      <div className="app-bg"  >
         <div className="main-wrapper">
           <div className="uplogo">
             <img src={logo} height="350px" alt="Logo" />
@@ -67,6 +58,7 @@ export default function MainScreen() {
               src={Carl}
               height="200px"
               alt="Carl"
+              className="carl-imgCharacter"
               onClick={() => handleSoundEffect("Carl")}
             />
           </div>
@@ -80,7 +72,9 @@ export default function MainScreen() {
               src={Kevin}
               height="350px"
               alt="Kevin"
+              className="kevin-imgCharacter"
               onClick={() => handleSoundEffect("Bird")}
+
             />
           </div>
 
@@ -89,6 +83,7 @@ export default function MainScreen() {
               src={Russell}
               height="200px"
               alt="Russell"
+              className="russell-imgCharacter"
               onClick={() => handleSoundEffect("Russell")}
             />
           </div>
@@ -107,7 +102,6 @@ export default function MainScreen() {
               title="Start Now"
               onClick={() => {
                 openModal("categories");
-                handleSoundEffect("Click");
               }}
             />
           </div>
@@ -116,14 +110,12 @@ export default function MainScreen() {
               content={<BsGearFill size={30} className="icon" />}
               onClick={() => {
                 openModal("settings");
-                handleSoundEffect("Click");
               }}
             />
             <SquareButton
               content={<AiOutlineQuestionCircle size={30} className="icon" />}
               onClick={() => {
                 openModal("how to");
-                handleSoundEffect("Click");
               }}
             />
             <ModalComponent
@@ -131,15 +123,9 @@ export default function MainScreen() {
               closeModal={closeModal}
               modalContent={modalContent}
               navigateToPreGame={navigateToPreGame}
-              isMusicEnabled={isMusicEnabled}
-              setIsMusicEnabled={setIsMusicEnabled}
+              handleSoundEffect={handleSoundEffect}
             />
-            {isSoundEnabled && (
-              <SoundEffectPlayer
-                isSoundEnabled={isSoundEnabled}
-                musicId={currentMusicId}
-              />
-            )}
+        
           </div>
         </div>
       </div>

@@ -1,25 +1,34 @@
 import { useContext } from "react";
-import { categoryContext } from "../../App";
-export default function CategoriesModalContent() {
+import { categoryContext, soundStateContext } from "../../App";
+
+export default function CategoriesModalContent(props) {
+
+
+  const { handleSoundEffect, currentSoundId } = useContext(soundStateContext);
   const { setSelectedOption, selectedOption } = useContext(categoryContext);
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
+    if (currentSoundId !== "ClickNext" ) {
+      handleSoundEffect("ClickNext")
+    }else if (currentSoundId !== "ClickPrev") {
+      handleSoundEffect("ClickPrev")
+  }
   };
 
   return (
     <>
       <div className="category-Container">
         <div className="category-checkbox">
-          <label className="category-radioLabel">
+          <label className="category-radioLabel" >
             <input
               type="radio"
               name="choice"
               value="Person"
               setSelectedOption
               onChange={handleOptionChange}
-              checked={selectedOption === "Person"}
+              checked={selectedOption === "Person" }
             ></input>
-            <div className="category-tagtitle">Person</div>
+            <div className="category-tagtitle" >Person</div>
           </label>
 
           <label className="category-radioLabel">

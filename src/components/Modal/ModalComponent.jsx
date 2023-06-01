@@ -7,6 +7,7 @@ import HowToStepper from "./HowtoSteppers";
 import "./Modal.css";
 import SettingsModalContent from "./SettingsModalContent";
 
+
 export default function ModalComponent(props) {
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -22,7 +23,7 @@ export default function ModalComponent(props) {
                   {props.modalContent === "how to" && "How to Play"}
                   {props.modalContent === "categories" && "Pick a Category"}
                 </div>
-                <CloseButton onClick={props.closeModal} />
+                <CloseButton onClick={() => { props.closeModal();  }} />
               </div>
               <div className="modal-body">
                 <div className="modal-left">
@@ -44,10 +45,15 @@ export default function ModalComponent(props) {
                     />
                   )}
                   {props.modalContent === "how to" && (
-                    <HowtoModalContent currentStep={currentStep} />
+                    <HowtoModalContent currentStep={currentStep} 
+                    handleSoundEffect={props.handleSoundEffect}
+
+                    />
                   )}
                   {props.modalContent === "categories" && (
-                    <CategoriesModalContent />
+                    <CategoriesModalContent 
+                    handleSoundEffect={props.handleSoundEffect}
+                    />
                   )}
                 </div>
                 <div className="modal-right">
@@ -67,11 +73,12 @@ export default function ModalComponent(props) {
                   <HowToStepper
                     currentStep={currentStep}
                     setCurrentStep={setCurrentStep}
+                    
                   />
                 )}
                 {props.modalContent === "categories" && (
                   <div className="select-container">
-                    <Button title="Select" onClick={props.navigateToPreGame} />
+                    <Button title="Select" onClick={() => { props.handleSoundEffect("ClickX");  props.navigateToPreGame();}} />
                   </div>
                 )}
               </div>
