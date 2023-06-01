@@ -1,9 +1,18 @@
 import "./Button.css";
+import { soundStateContext } from "../../App";
+import { useContext } from "react";
 
 const Button = ({ onClick, title }) => {
+
+  const { handleSoundEffect } = useContext(soundStateContext);
+
+  const handleClick = () => {
+    handleSoundEffect("Click");
+    onClick();
+  };
   return (
     <div className="outerBtn" >
-      <div className="innerBtn" onClick={onClick}
+      <div className="innerBtn" onClick={handleClick} 
 >
         <div className="btn">
           <button

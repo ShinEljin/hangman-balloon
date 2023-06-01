@@ -1,8 +1,19 @@
+import { useContext } from "react";
+import { soundStateContext } from "../../App";
+
 export default function SettingsModalContent(props) {
+
+  const { isSoundEffectEnabled, setIsSoundEffectEnabled, isMusicEnabled, setIsMusicEnabled } = useContext(soundStateContext);
+
   
-  const handleMusicToggle = (event) => {
-    props.setIsMusicEnabled(event.target.checked);
+  const handleSoundToggle = () => {
+    setIsSoundEffectEnabled((prevValue) => !prevValue);
   };
+
+  const handleMusicToggle = () => {
+    setIsMusicEnabled((prevValue) => !prevValue);
+  }
+
   
 
   return (
@@ -15,15 +26,19 @@ export default function SettingsModalContent(props) {
 
         <div className="checkboxes">
           <div className="checkbox-container">
-            <input type="checkbox" id="sound" className="settings-checkbox" />
+            <input type="checkbox" 
+            id="sound" 
+            className="settings-checkbox" 
+            checked={isSoundEffectEnabled}
+            onChange={handleSoundToggle}/>
           </div>
           <div className="checkbox-container">
             <input
               type="checkbox"
               id="music"
               className="settings-checkbox"
-              checked={props.isMusicEnabled}
-              onChange={handleMusicToggle}
+               checked={isMusicEnabled}
+                onChange={handleMusicToggle}
             />
           </div>
         </div>

@@ -76,3 +76,10 @@
   right: 250px;
   bottom: 0;
 }
+
+.carl-imgCharacter,
+.kevin-imgCharacter,
+.russell-imgCharacter
+{
+cursor: pointer;
+}

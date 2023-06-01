@@ -17,8 +17,16 @@ import Balloon from "../../components/Balloon/Balloon";
 import Keyboard from "../../components/Keyboard/Keyboard";
 import Word from "../../components/Word/Word";
 import { randWord } from "../../lib/Words";
+import { soundStateContext } from "../../App";
+import WinnerModal from "../../components/Modal/WinnerModal";
+import LoserModal from "../../components/Modal/LoserModal";
+import { useNavigate } from "react-router-dom";
 
 const GameScreen = () => {
+  const navigate = useNavigate();
+
+  const { handleBgMusicToggle, handleSoundEffect, currentSoundId, isMusicEnabled  } = useContext(soundStateContext);
+
   const images = [step0, step1, step2, step3, step4, step5];
   var width = window.innerWidth;
   var height = window.innerHeight;
@@ -28,38 +36,117 @@ const GameScreen = () => {
   const [question, setQuestion] = useState("");
   const [timeRemaining, setTimeRemaining] = useState(null);
   const { selectedOption } = useContext(categoryContext);
+  const [modalOpenWinner, setModalOpenWinner] = useState(false);
+  const [modalOpenLoser, setModalOpenLoser] = useState(false);
+
+
+
+  const handleNextStep = () => {
+    navigate("/");
+  };
+  function openModalWinner() {
+    setModalOpenWinner(true);
+  }
+  function closeModalWinner() {
+    setModalOpenWinner(false);
+    handleNextStep();
+
+  }
+
+
+  function openModalLoser() {
+    setModalOpenLoser(true);
+  }
+
+  function closeModalLoser() {
+    setModalOpenLoser(false);
+    handleNextStep();
+
+
+  }
+
 
   const incorrectLetters = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
   );
-  console.log(wordToGuess);
+   console.log(wordToGuess);
   const isLoser = incorrectLetters.length >= 5 || timeRemaining === 0;
   const isWinner = wordToGuess
     ?.split("")
     .filter((letter) => letter !== " ")
     .every((letter) => guessedLetters.includes(letter));
 
-  const addGuessedLetter = useCallback(
-    (letter) => {
-      if (guessedLetters.includes(letter) || isLoser || isWinner) return;
-      setGuessedLetters((currentLetters) => [...currentLetters, letter]);
-    },
-    [guessedLetters, isWinner, isLoser]
-  );
+    const addGuessedLetter = useCallback(
+      (letter) => {
+        if (guessedLetters.includes(letter) || isLoser || isWinner) return;
+        setGuessedLetters((currentLetters) => [...currentLetters, letter]);
+    
+        if (wordToGuess.includes(letter)) {
+          if (currentSoundId !== "CorrectA" ) {
+            handleSoundEffect("CorrectA");
+          } else if (currentSoundId === "CorrectA") {
+            handleSoundEffect("CorrectB");
+          } else if (currentSoundId === "CorrectB") {
+            handleSoundEffect("CorrectA");
+          }
+        } else {
+          if (currentSoundId !== "WrongA" ) {
+            handleSoundEffect("WrongA");
+          } else if (currentSoundId === "WrongA") {
+            handleSoundEffect("WrongB");
+          } else if (currentSoundId === "WrongB") {
+            handleSoundEffect("WrongA");
+          }
+        }
+      },
+      [guessedLetters, isWinner, isLoser, currentSoundId]
+    );
+    
 
   useEffect(() => {
     const rp = randWord(selectedOption);
     setWordToGuess(rp.word.toUpperCase());
     setQuestion(rp.Hint);
   }, []);
+
   useEffect(() => {
     if (isLoser) {
+      handleBgMusicToggle("Remove");
+      handleSoundEffect("Loser");
       document.querySelector(".cloud_class_level_5").style.animationDirection =
         "reverse";
       document.querySelector(".cloud_class_level_5").style.animationDuration =
         "600ms";
+      setTimeout (() => {
+          openModalLoser();
+      }, 4000) // adjust time for loser modal
+   
+      
     }
-  }, [isLoser, isWinner]);
+    if (isWinner) {
+      handleBgMusicToggle("Remove");
+      handleSoundEffect("Winner");
+      setTimeout (() => {
+          openModalWinner();
+      }, 4000) // adjust time for winner modal
+   
+    }
+  }, [isLoser, isWinner]); 
+
+  useEffect(() => {
+    if (timeRemaining === 10) {
+      handleSoundEffect("Countdown");
+    }
+  }, [timeRemaining]);
+
+  useEffect(() => {
+  if (isMusicEnabled){
+    handleBgMusicToggle("InGame");
+  }
+    return () => {
+      handleBgMusicToggle(""); 
+    };
+  }, [ isMusicEnabled]);
 
   return (
     <div className="cloud_class_level_5">
@@ -142,6 +229,17 @@ const GameScreen = () => {
 
               {gameStat === 0 ? <> {reset} </> : null} */}
             </div>
+
+            <WinnerModal
+              modalOpenWinner={modalOpenWinner}
+              handleNextStep={handleNextStep}
+              closeModalWinner={closeModalWinner}
+            />
+            <LoserModal
+            modalOpenLoser={modalOpenLoser} 
+            handleNextStep={handleNextStep}
+            closeModalLoser={closeModalLoser}
+            />
           </div>
         </div>
       </div>
