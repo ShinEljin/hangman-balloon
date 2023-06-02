@@ -157,7 +157,7 @@ const GameScreen = () => {
         {!isWinner && (
           <CountdownCircleTimer
             isPlaying
-            duration={20}
+            duration={60}
             colors={["#00c127", "#F7B801", "#F7B801", "#A30000", "#A30000"]}
             colorsTime={[60, 30, 20, 10, 0]}
             strokeWidth={12}
