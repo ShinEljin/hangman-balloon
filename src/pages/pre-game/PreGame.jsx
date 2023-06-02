@@ -23,7 +23,7 @@ function PreGame() {
           <div className="main-text">
             <CountdownCircleTimer
               isPlaying
-              duration={60}
+              duration={3}
               colors={[
                 "#CFAA4B",
                 "#CFAA4B",
