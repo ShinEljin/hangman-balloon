@@ -21,7 +21,7 @@ export default function MainScreen() {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
-  const { handleSoundEffect, handleBgMusicToggle } = useContext(soundStateContext);
+  const { handleSoundEffect } = useContext(soundStateContext);
 
 
   function openModal(content) {
@@ -40,7 +40,7 @@ export default function MainScreen() {
   };
 
   return (
-    <div className="cloud__class__1"     onClick={()=> {handleBgMusicToggle("Home")}}
+    <div className="cloud__class__1"
 
     >
   
