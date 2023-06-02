@@ -14,7 +14,7 @@ import Button from "../../components/Button/Button";
 import SquareButton from "../../components/Button/SquareButton";
 import ModalComponent from "../../components/Modal/ModalComponent";
 import { soundStateContext } from "../../App";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 export default function MainScreen() {
   const navigate = useNavigate();
@@ -23,11 +23,6 @@ export default function MainScreen() {
   const [modalContent, setModalContent] = useState("");
   const { handleSoundEffect, handleBgMusicToggle } = useContext(soundStateContext);
 
-  useEffect(() => {
-    return () => {
-      handleBgMusicToggle("Home"); 
-    };
-  }, []);
 
   function openModal(content) {
     setModalContent(content);
@@ -41,11 +36,13 @@ export default function MainScreen() {
 
   const navigateToPreGame = () => {
     navigate("/pre-game");
+
   };
 
-
+  //onClick={()=> {handleBgMusicToggle("Home")}}
   return (
-    <div className="cloud__class__1">
+    <div className="cloud__class__1"   
+    >
   
       <div className="app-bg"  >
         <div className="main-wrapper">
