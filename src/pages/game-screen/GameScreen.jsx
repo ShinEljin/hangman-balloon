@@ -154,9 +154,10 @@ const GameScreen = () => {
         {/* CONFETTI IF WIN */}
         {isWinner ? <Confetti width={width} height={height} /> : null}
         <div className="game-timer">
+        {!isWinner && (
           <CountdownCircleTimer
             isPlaying
-            duration={60}
+            duration={20}
             colors={["#00c127", "#F7B801", "#F7B801", "#A30000", "#A30000"]}
             colorsTime={[60, 30, 20, 10, 0]}
             strokeWidth={12}
@@ -173,6 +174,7 @@ const GameScreen = () => {
               );
             }}
           </CountdownCircleTimer>
+          )}
         </div>
 
         <div className="Hangman">

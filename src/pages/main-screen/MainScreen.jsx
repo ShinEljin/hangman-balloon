@@ -35,7 +35,6 @@ const useClickSound = (soundFile, cooldown) => {
   return { handleClick };
 };
 
-
 export default function MainScreen() {
   const navigate = useNavigate();
 
