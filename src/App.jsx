@@ -36,7 +36,7 @@ function App() {
     } else if (routePath === "/game") {
       setCurrentMusicId("InGame");
     } else {
-      setCurrentMusicId("Home");
+      setCurrentMusicId("");
     }
   };
   

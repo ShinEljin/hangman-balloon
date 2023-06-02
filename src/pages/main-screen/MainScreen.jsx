@@ -39,9 +39,9 @@ export default function MainScreen() {
 
   };
 
-  //onClick={()=> {handleBgMusicToggle("Home")}}
   return (
-    <div className="cloud__class__1"   
+    <div className="cloud__class__1"     onClick={()=> {handleBgMusicToggle("Home")}}
+
     >
   
       <div className="app-bg"  >
