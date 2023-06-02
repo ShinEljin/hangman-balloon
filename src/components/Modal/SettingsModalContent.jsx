@@ -3,7 +3,7 @@ import { soundStateContext } from "../../App";
 
 export default function SettingsModalContent(props) {
 
-  const { isSoundEffectEnabled, setIsSoundEffectEnabled, isMusicEnabled, setIsMusicEnabled, handleSoundEffect} = useContext(soundStateContext);
+  const { isSoundEffectEnabled, setIsSoundEffectEnabled, isMusicEnabled, setIsMusicEnabled, handleSoundEffect, currentSoundId} = useContext(soundStateContext);
 
   
   const handleSoundToggle = () => {
@@ -26,7 +26,12 @@ export default function SettingsModalContent(props) {
         </div>
 
         <div className="checkboxes" >
-          <div className="checkbox-container" onClick={()=> {handleSoundEffect("ClickNext")}}>
+          <div className="checkbox-container" 
+          onClick={()=> { if (currentSoundId !== "ClickNext" ) {
+                handleSoundEffect("ClickNext")
+              }else if (currentSoundId !== "ClickPrev") {
+                handleSoundEffect("ClickPrev")
+            }}}>
             <input type="checkbox" 
             id="sound" 
             className="settings-checkbox" 
@@ -34,7 +39,12 @@ export default function SettingsModalContent(props) {
             onChange={handleSoundToggle}
             />
           </div>
-          <div className="checkbox-container" onClick={()=> {handleSoundEffect("ClickPrev")}}>
+          <div className="checkbox-container" 
+           onClick={()=> { if (currentSoundId !== "ClickNext" ) {
+            handleSoundEffect("ClickNext")
+          }else if (currentSoundId !== "ClickPrev") {
+            handleSoundEffect("ClickPrev")
+          }}}>
             <input
               type="checkbox"
               id="music"
