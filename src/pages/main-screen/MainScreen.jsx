@@ -4,6 +4,9 @@ import Carl from "../../assets/characters/Carl.png";
 import House from "../../assets/characters/House.png";
 import Kevin from "../../assets/characters/Kevin.png";
 import Russell from "../../assets/characters/Russell.png";
+import CarlClickSfx from "../../assets/soundFx/TANDA.mp3";
+import RussellClickSfx from "../../assets/soundFx/BATA.mp3";
+import BirdClickSfx from "../../assets/soundFx/IBON.mp3";
 import "./MainScreen.css";
 
 import { useState } from "react";
@@ -15,6 +18,23 @@ import SquareButton from "../../components/Button/SquareButton";
 import ModalComponent from "../../components/Modal/ModalComponent";
 import { soundStateContext } from "../../App";
 import { useContext } from "react";
+import useSound from "use-sound";
+
+const useClickSound = (soundFile, cooldown) => {
+  const [playSound] = useSound(soundFile);
+  const [enabled, setEnabled] = useState(true);
+
+  const handleClick = () => {
+    if (enabled) {
+      playSound();
+      setEnabled(false);
+      setTimeout(() => setEnabled(true), cooldown);
+    }
+  };
+
+  return { handleClick };
+};
+
 
 export default function MainScreen() {
   const navigate = useNavigate();
@@ -39,6 +59,12 @@ export default function MainScreen() {
 
   };
 
+  const { handleClick: handleCarlClick } = useClickSound(CarlClickSfx, 700);
+  const { handleClick: handleRussellClick } = useClickSound(RussellClickSfx, 700);
+  const { handleClick: handleBirdClick } = useClickSound(BirdClickSfx, 500);
+
+
+
   return (
     <div className="cloud__class__1"
 
@@ -56,7 +82,8 @@ export default function MainScreen() {
               height="200px"
               alt="Carl"
               className="carl-imgCharacter"
-              onClick={() => handleSoundEffect("Carl")}
+              onClick={handleCarlClick}
+
             />
           </div>
 
@@ -70,7 +97,8 @@ export default function MainScreen() {
               height="350px"
               alt="Kevin"
               className="kevin-imgCharacter"
-              onClick={() => handleSoundEffect("Bird")}
+              onClick={handleBirdClick}
+
 
             />
           </div>
@@ -81,7 +109,8 @@ export default function MainScreen() {
               height="200px"
               alt="Russell"
               className="russell-imgCharacter"
-              onClick={() => handleSoundEffect("Russell")}
+              onClick={handleRussellClick}
+
             />
           </div>
 
