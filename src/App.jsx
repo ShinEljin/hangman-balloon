@@ -1,10 +1,10 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
+import BgMusicPlayer from "./components/AudioManager/BgMusicPlayer";
+import SoundEffectPlayer from "./components/AudioManager/SoundEffectPlayer";
 import GameScreen from "./pages/game-screen/GameScreen";
 import MainScreen from "./pages/main-screen/MainScreen";
 import PreGame from "./pages/pre-game/PreGame";
-import SoundEffectPlayer from "./components/AudioManager/SoundEffectPlayer";
-import BgMusicPlayer from "./components/AudioManager/BgMusicPlayer";
 
 export const categoryContext = createContext();
 export const soundStateContext = createContext();
@@ -21,16 +21,17 @@ function App() {
   const [isSoundEffectEnabled, setIsSoundEffectEnabled] = useState(true);
   const [currentSoundId, setCurrentSoundId] = useState("");
   const [currentMusicId, setCurrentMusicId] = useState("");
+  const [isStopAllSounds, setIsStopAllSounds] = useState(false);
+
   const location = useLocation();
   const routePath = location.pathname;
 
-
   useEffect(() => {
+    setIsMusicEnabled(true);
     handleBgMusicToggle();
-  }, [routePath]);
+  }, []);
 
   const handleBgMusicToggle = () => {
-    setIsMusicEnabled(true);
     if (routePath === "/pre-game") {
       setCurrentMusicId("PreGame");
     } else if (routePath === "/game") {
@@ -39,7 +40,7 @@ function App() {
       setCurrentMusicId("Home");
     }
   };
-  
+
   const handleSoundEffect = (musicId) => {
     if (currentSoundId === musicId) {
       setIsSoundEnabled(!isSoundEnabled);
@@ -48,9 +49,10 @@ function App() {
       setCurrentSoundId(musicId);
     }
   };
-
-
-
+  const handleChangeBG = (musicId) => {
+    setIsMusicEnabled(true);
+    setCurrentMusicId(musicId);
+  };
 
   return (
     <categoryContext.Provider value={selectedOptionObject}>
@@ -64,6 +66,8 @@ function App() {
           currentMusicId,
           isMusicEnabled,
           setIsMusicEnabled,
+          setIsStopAllSounds,
+          handleChangeBG,
         }}
       >
         {isMusicEnabled && (
@@ -84,6 +88,7 @@ function App() {
             isSoundEnabled={isSoundEnabled}
             musicId={currentSoundId}
             isSoundEffectEnabled={isSoundEffectEnabled}
+            isStopAllSounds={isStopAllSounds}
           />
         )}
       </soundStateContext.Provider>
