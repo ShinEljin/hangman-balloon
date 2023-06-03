@@ -37,7 +37,7 @@ const GameScreen = () => {
   const [timeRemaining, setTimeRemaining] = useState(null);
   const { selectedOption } = useContext(categoryContext);
   const [modalOpenWinner, setModalOpenWinner] = useState(false);
-  const [modalOpenLoser, setModalOpenLoser] = useState(true);
+  const [modalOpenLoser, setModalOpenLoser] = useState(false);
 
 
 
