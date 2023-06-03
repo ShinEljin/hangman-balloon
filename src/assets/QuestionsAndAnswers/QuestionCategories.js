@@ -389,7 +389,7 @@ export default {
       Hint: "Tropical island in the Philippines known for its stunning white sand beaches, crystal clear waters",
     },
     {
-      word: ":Luneta Park",
+      word: "Luneta Park",
       Hint: "The park was also formerly known as Bagumbayan ",
     },
     {
