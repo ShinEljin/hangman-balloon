@@ -37,7 +37,7 @@ const GameScreen = () => {
   const [timeRemaining, setTimeRemaining] = useState(null);
   const { selectedOption } = useContext(categoryContext);
   const [modalOpenWinner, setModalOpenWinner] = useState(false);
-  const [modalOpenLoser, setModalOpenLoser] = useState(false);
+  const [modalOpenLoser, setModalOpenLoser] = useState(true);
 
 
 
@@ -154,7 +154,6 @@ const GameScreen = () => {
         {/* CONFETTI IF WIN */}
         {isWinner ? <Confetti width={width} height={height} /> : null}
         <div className="game-timer">
-        {!isWinner && (
           <CountdownCircleTimer
             isPlaying
             duration={60}
@@ -174,7 +173,7 @@ const GameScreen = () => {
               );
             }}
           </CountdownCircleTimer>
-          )}
+          
         </div>
 
         <div className="Hangman">
