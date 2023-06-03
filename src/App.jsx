@@ -1,14 +1,14 @@
-import { createContext, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { createContext, useState, useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import GameScreen from "./pages/game-screen/GameScreen";
 import MainScreen from "./pages/main-screen/MainScreen";
 import PreGame from "./pages/pre-game/PreGame";
 import SoundEffectPlayer from "./components/AudioManager/SoundEffectPlayer";
-
 import BgMusicPlayer from "./components/AudioManager/BgMusicPlayer";
 
 export const categoryContext = createContext();
 export const soundStateContext = createContext();
+
 function App() {
   const [selectedOption, setSelectedOption] = useState("");
   const selectedOptionObject = {
@@ -21,12 +21,25 @@ function App() {
   const [isSoundEffectEnabled, setIsSoundEffectEnabled] = useState(true);
   const [currentSoundId, setCurrentSoundId] = useState("");
   const [currentMusicId, setCurrentMusicId] = useState("");
+  const location = useLocation();
+  const routePath = location.pathname;
 
-  const handleBgMusicToggle = (musicId) => {
+
+  useEffect(() => {
+    handleBgMusicToggle();
+  }, [routePath]);
+
+  const handleBgMusicToggle = () => {
     setIsMusicEnabled(true);
-    setCurrentMusicId(musicId);
+    if (routePath === "/pre-game") {
+      setCurrentMusicId("PreGame");
+    } else if (routePath === "/game") {
+      setCurrentMusicId("InGame");
+    } else {
+      setCurrentMusicId("Home");
+    }
   };
-
+  
   const handleSoundEffect = (musicId) => {
     if (currentSoundId === musicId) {
       setIsSoundEnabled(!isSoundEnabled);
@@ -35,6 +48,9 @@ function App() {
       setCurrentSoundId(musicId);
     }
   };
+
+
+
 
   return (
     <categoryContext.Provider value={selectedOptionObject}>
@@ -45,6 +61,7 @@ function App() {
           handleSoundEffect,
           handleBgMusicToggle,
           currentSoundId,
+          currentMusicId,
           isMusicEnabled,
           setIsMusicEnabled,
         }}
@@ -61,6 +78,7 @@ function App() {
           <Route path="/" element={<MainScreen />} />
           <Route path="/game" element={<GameScreen />} />
         </Routes>
+
         {isSoundEnabled && (
           <SoundEffectPlayer
             isSoundEnabled={isSoundEnabled}

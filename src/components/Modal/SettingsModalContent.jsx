@@ -3,11 +3,12 @@ import { soundStateContext } from "../../App";
 
 export default function SettingsModalContent(props) {
 
-  const { isSoundEffectEnabled, setIsSoundEffectEnabled, isMusicEnabled, setIsMusicEnabled } = useContext(soundStateContext);
+  const { isSoundEffectEnabled, setIsSoundEffectEnabled, isMusicEnabled, setIsMusicEnabled, handleSoundEffect, currentSoundId} = useContext(soundStateContext);
 
   
   const handleSoundToggle = () => {
     setIsSoundEffectEnabled((prevValue) => !prevValue);
+
   };
 
   const handleMusicToggle = () => {
@@ -17,32 +18,62 @@ export default function SettingsModalContent(props) {
   
 
   return (
+    <>
+    <div className = "settings-contentContainer">
     <div className="settings-Container">
-      <div className="inner-Container">
-        <div className="checkboxes">
-          <label className="content-tagtitle">Sound</label>
-          <label className="content-tagtitle">Music</label>
-        </div>
+    <div className="inner-Container">
+      <div className="custom-checkbox">
+        <div className="new">
+            <div className="form-group">
+              <div 
+                 onClick={() => { 
+                  if (currentSoundId !== "ClickNext" && currentSoundId !== "ClickPrev") {
+                    handleSoundEffect("ClickNext");
+                  } else {
+                    handleSoundEffect("ClickPrev");
+                  }
+                }}
+              >
+              <input type="checkbox" id="sound"
+               checked={isSoundEffectEnabled}
+               onChange={handleSoundToggle} />
+              <label htmlFor="sound"></label>
 
-        <div className="checkboxes">
-          <div className="checkbox-container">
-            <input type="checkbox" 
-            id="sound" 
-            className="settings-checkbox" 
-            checked={isSoundEffectEnabled}
-            onChange={handleSoundToggle}/>
-          </div>
-          <div className="checkbox-container">
-            <input
-              type="checkbox"
-              id="music"
-              className="settings-checkbox"
-               checked={isMusicEnabled}
-                onChange={handleMusicToggle}
-            />
-          </div>
+              </div>
+
+             
+            </div>
+            <div className="form-group">
+              <div 
+                onClick={() => { 
+                  if (currentSoundId !== "ClickNext" && currentSoundId !== "ClickPrev") {
+                    handleSoundEffect("ClickNext");
+                  } else {
+                    handleSoundEffect("ClickPrev");
+                  }
+                }}
+              >
+            <input type="checkbox" id="music"
+              checked={isMusicEnabled}
+              onChange={handleMusicToggle} />
+              <label htmlFor="music"></label>
+              </div>
+            </div>
+
         </div>
       </div>
+
+   
     </div>
+
+  </div>
+  <div className="checkboxes-label">
+      <div className="content-tagtitle">Sound</div>
+      <div className="content-tagtitle">Music</div>
+
+  </div>
+  </div>
+  </>
+  
   );
 }

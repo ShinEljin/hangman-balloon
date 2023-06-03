@@ -37,7 +37,7 @@ const GameScreen = () => {
   const [timeRemaining, setTimeRemaining] = useState(null);
   const { selectedOption } = useContext(categoryContext);
   const [modalOpenWinner, setModalOpenWinner] = useState(false);
-  const [modalOpenLoser, setModalOpenLoser] = useState(false);
+  const [modalOpenLoser, setModalOpenLoser] = useState(true);
 
 
 
@@ -173,6 +173,7 @@ const GameScreen = () => {
               );
             }}
           </CountdownCircleTimer>
+          
         </div>
 
         <div className="Hangman">
