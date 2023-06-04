@@ -23,7 +23,7 @@ const soundSources = {
   },
 };
 
-export default function BgMusicPlayer({ isMusicEnabled, musicId }) {
+export default function BgMusicPlayer({ isMusicEnabled, musicId, isMusicEffectEnabled}) {
   const { src, volume } = soundSources[musicId] || {};
 
   const [play, { pause }] = useSound(src, {
@@ -42,7 +42,7 @@ export default function BgMusicPlayer({ isMusicEnabled, musicId }) {
   }, []);
 
   useEffect(() => {
-    if (isMusicEnabled) {
+    if (isMusicEnabled &&  isMusicEffectEnabled) {
       if (currentMusicIdRef.current && currentMusicIdRef.current !== musicId) {
         pause();
       }
@@ -56,7 +56,7 @@ export default function BgMusicPlayer({ isMusicEnabled, musicId }) {
       pause();
       currentMusicIdRef.current = null;
     };
-  }, [isMusicEnabled, musicId, play, pause]);
+  }, [isMusicEnabled, musicId, play, pause,  isMusicEffectEnabled]);
 
   return null;
 }

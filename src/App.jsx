@@ -18,6 +18,7 @@ function App() {
 
   const [isMusicEnabled, setIsMusicEnabled] = useState(false);
   const [isSoundEnabled, setIsSoundEnabled] = useState(false);
+  const [isMusicEffectEnabled, setIsMusicEffectEnabled] = useState(true);
   const [isSoundEffectEnabled, setIsSoundEffectEnabled] = useState(true);
   const [currentSoundId, setCurrentSoundId] = useState("");
   const [currentMusicId, setCurrentMusicId] = useState("");
@@ -27,11 +28,11 @@ function App() {
   const routePath = location.pathname;
 
   useEffect(() => {
-    setIsMusicEnabled(true);
     handleBgMusicToggle();
   }, []);
 
   const handleBgMusicToggle = () => {
+    setIsMusicEnabled(true);
     if (routePath === "/pre-game") {
       setCurrentMusicId("PreGame");
     } else if (routePath === "/game") {
@@ -54,6 +55,8 @@ function App() {
     setCurrentMusicId(musicId);
   };
 
+  console.log(isMusicEffectEnabled)
+
   return (
     <categoryContext.Provider value={selectedOptionObject}>
       <soundStateContext.Provider
@@ -68,12 +71,15 @@ function App() {
           setIsMusicEnabled,
           setIsStopAllSounds,
           handleChangeBG,
+          isMusicEffectEnabled,
+          setIsMusicEffectEnabled
         }}
       >
         {isMusicEnabled && (
           <BgMusicPlayer
             isMusicEnabled={isMusicEnabled}
             musicId={currentMusicId}
+            isMusicEffectEnabled={isMusicEffectEnabled}
           />
         )}
 

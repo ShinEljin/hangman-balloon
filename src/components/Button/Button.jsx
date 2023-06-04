@@ -6,7 +6,7 @@ const Button = ({ onClick, title }) => {
   const { handleSoundEffect } = useContext(soundStateContext);
 
   const handleClick = () => {
-    handleSoundEffect("Click");
+    handleSoundEffect("ClickNext");
     onClick();
   };
   return (

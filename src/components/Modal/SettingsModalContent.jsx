@@ -3,7 +3,7 @@ import { soundStateContext } from "../../App";
 
 export default function SettingsModalContent(props) {
 
-  const { isSoundEffectEnabled, setIsSoundEffectEnabled, isMusicEnabled, setIsMusicEnabled, handleSoundEffect, currentSoundId} = useContext(soundStateContext);
+  const { isSoundEffectEnabled, setIsSoundEffectEnabled, isMusicEffectEnabled, setIsMusicEffectEnabled, handleSoundEffect, currentSoundId} = useContext(soundStateContext);
 
   
   const handleSoundToggle = () => {
@@ -12,7 +12,7 @@ export default function SettingsModalContent(props) {
   };
 
   const handleMusicToggle = () => {
-    setIsMusicEnabled((prevValue) => !prevValue);
+    setIsMusicEffectEnabled((prevValue) => !prevValue);
   }
 
   
@@ -25,18 +25,17 @@ export default function SettingsModalContent(props) {
       <div className="custom-checkbox">
         <div className="new">
             <div className="form-group">
-              <div 
-                 onClick={() => { 
-                  if (currentSoundId !== "ClickNext" && currentSoundId !== "ClickPrev") {
-                    handleSoundEffect("ClickNext");
-                  } else {
-                    handleSoundEffect("ClickPrev");
-                  }
-                }}
-              >
+              <div >
               <input type="checkbox" id="sound"
                checked={isSoundEffectEnabled}
-               onChange={handleSoundToggle} />
+               onChange={handleSoundToggle} 
+               onClick={() => { 
+                if (currentSoundId !== "ClickNext" ) {
+                  handleSoundEffect("ClickNext")
+                }else if (currentSoundId !== "ClickPrev") {
+                  handleSoundEffect("ClickPrev")
+              }
+              }}/>
               <label htmlFor="sound"></label>
 
               </div>
@@ -44,18 +43,17 @@ export default function SettingsModalContent(props) {
              
             </div>
             <div className="form-group">
-              <div 
-                onClick={() => { 
-                  if (currentSoundId !== "ClickNext" && currentSoundId !== "ClickPrev") {
-                    handleSoundEffect("ClickNext");
-                  } else {
-                    handleSoundEffect("ClickPrev");
-                  }
-                }}
-              >
+              <div >
             <input type="checkbox" id="music"
-              checked={isMusicEnabled}
-              onChange={handleMusicToggle} />
+              checked={isMusicEffectEnabled}
+              onChange={handleMusicToggle}
+              onClick={() => { 
+                if (currentSoundId !== "ClickNext" ) {
+                  handleSoundEffect("ClickNext")
+                }else if (currentSoundId !== "ClickPrev") {
+                  handleSoundEffect("ClickPrev")
+              }
+              }} />
               <label htmlFor="music"></label>
               </div>
             </div>
