@@ -153,10 +153,10 @@ const GameScreen = () => {
 
   useEffect(() => {
     if (isMusicEnabled) {
-      handleBgMusicToggle("InGame");
+      handleChangeBG("InGame");
     }
     return () => {
-      handleBgMusicToggle("");
+      handleChangeBG("");
     };
   }, [isMusicEnabled]);
 
@@ -255,6 +255,7 @@ const GameScreen = () => {
               modalOpenLoser={modalOpenLoser}
               handleNextStep={() => retryButtonFunction()}
               closeModalLoser={closeModalLoser}
+
             />
           </div>
         </div>

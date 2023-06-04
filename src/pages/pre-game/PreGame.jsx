@@ -7,7 +7,7 @@ import { soundStateContext } from "../../App";
 
 function PreGame() {
   const {
-    handleBgMusicToggle,
+    handleChangeBG,
     isMusicEnabled,
 
   } = useContext(soundStateContext);
@@ -20,10 +20,10 @@ function PreGame() {
 
   useEffect(() => {
     if (isMusicEnabled) {
-      handleBgMusicToggle("PreGame");
+      handleChangeBG("PreGame");
     }
     return () => {
-      handleBgMusicToggle("");
+      handleChangeBG("");
     };
   }, [isMusicEnabled]);
   
