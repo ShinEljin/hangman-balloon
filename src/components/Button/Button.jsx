@@ -3,11 +3,15 @@ import { soundStateContext } from "../../App";
 import "./Button.css";
 
 const Button = ({ onClick, title }) => {
-  const { handleSoundEffect } = useContext(soundStateContext);
+  const { handleSoundEffect, currentSoundId } = useContext(soundStateContext);
 
   const handleClick = () => {
-    handleSoundEffect("ClickNext");
     onClick();
+    if (currentSoundId !== "ClickSelect" ) {
+      handleSoundEffect("ClickSelect")
+    }else if (currentSoundId !== "ClickSelectB") {
+      handleSoundEffect("ClickSelectB")
+  }
   };
   return (
     <div className="outerBtn">

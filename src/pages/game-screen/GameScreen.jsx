@@ -25,7 +25,6 @@ const GameScreen = () => {
   const navigate = useNavigate();
 
   const {
-    handleBgMusicToggle,
     handleSoundEffect,
     currentSoundId,
     isMusicEnabled,
@@ -79,6 +78,7 @@ const GameScreen = () => {
   function retryButtonFunction() {
     console.log("test");
     handleChangeBG("InGame");
+
   }
   const incorrectLetters = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
