@@ -1,9 +1,8 @@
-import "./Button.css";
-import { soundStateContext } from "../../App";
 import { useContext } from "react";
+import { soundStateContext } from "../../App";
+import "./Button.css";
 
 const Button = ({ onClick, title }) => {
-
   const { handleSoundEffect } = useContext(soundStateContext);
 
   const handleClick = () => {
@@ -11,9 +10,8 @@ const Button = ({ onClick, title }) => {
     onClick();
   };
   return (
-    <div className="outerBtn" >
-      <div className="innerBtn" onClick={handleClick} 
->
+    <div className="outerBtn">
+      <div className="innerBtn" onClick={handleClick}>
         <div className="btn">
           <button
             style={{
@@ -21,7 +19,6 @@ const Button = ({ onClick, title }) => {
               fontFamily: "Jua",
               color: "black",
             }}
-            onClick={onClick}
           >
             {title}
           </button>

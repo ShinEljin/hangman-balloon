@@ -5,7 +5,8 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import Confetti from "react-confetti";
 
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { categoryContext } from "../../App";
+import { useNavigate } from "react-router-dom";
+import { categoryContext, soundStateContext } from "../../App";
 import step5 from "../../assets/char-state/0_Balloon.png";
 import step4 from "../../assets/char-state/1_Balloon.png";
 import step3 from "../../assets/char-state/2_Balloon.png";
@@ -15,17 +16,23 @@ import step0 from "../../assets/char-state/5_Balloon.png";
 import Arrow from "../../components/Arrow/Arrow";
 import Balloon from "../../components/Balloon/Balloon";
 import Keyboard from "../../components/Keyboard/Keyboard";
+import LoserModal from "../../components/Modal/LoserModal";
+import WinnerModal from "../../components/Modal/WinnerModal";
 import Word from "../../components/Word/Word";
 import { randWord } from "../../lib/Words";
-import { soundStateContext } from "../../App";
-import WinnerModal from "../../components/Modal/WinnerModal";
-import LoserModal from "../../components/Modal/LoserModal";
-import { useNavigate } from "react-router-dom";
 
 const GameScreen = () => {
   const navigate = useNavigate();
 
-  const { handleBgMusicToggle, handleSoundEffect, currentSoundId, isMusicEnabled  } = useContext(soundStateContext);
+  const {
+    handleBgMusicToggle,
+    handleSoundEffect,
+    currentSoundId,
+    isMusicEnabled,
+    setIsStopAllSounds,
+    handleChangeBG,
+  } = useContext(soundStateContext);
+  const [level, setLevel] = useState(1);
 
   const images = [step0, step1, step2, step3, step4, step5];
   var width = window.innerWidth;
@@ -38,21 +45,26 @@ const GameScreen = () => {
   const { selectedOption } = useContext(categoryContext);
   const [modalOpenWinner, setModalOpenWinner] = useState(false);
   const [modalOpenLoser, setModalOpenLoser] = useState(false);
-
-
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [key, setKey] = useState(0);
+  const [numberOfBalloons] = useState(5);
 
   const handleNextStep = () => {
-    navigate("/");
+    handleChangeBG("InGame");
+    setLevel((prev) => prev + 1);
+    setGuessedLetters([]);
+    setModalOpenWinner(false);
+    setIsPlaying(true);
+    setKey((prevKey) => prevKey + 1);
   };
   function openModalWinner() {
     setModalOpenWinner(true);
   }
   function closeModalWinner() {
+    setIsStopAllSounds(true);
     setModalOpenWinner(false);
-    handleNextStep();
-
+    navigate("/");
   }
-
 
   function openModalLoser() {
     setModalOpenLoser(true);
@@ -60,78 +72,78 @@ const GameScreen = () => {
 
   function closeModalLoser() {
     setModalOpenLoser(false);
-    handleNextStep();
-
-
+    setIsStopAllSounds(true);
+    navigate("/");
   }
 
-
+  function retryButtonFunction() {
+    console.log("test");
+    handleChangeBG("InGame");
+  }
   const incorrectLetters = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
   );
-   console.log(wordToGuess);
+
   const isLoser = incorrectLetters.length >= 5 || timeRemaining === 0;
   const isWinner = wordToGuess
     ?.split("")
     .filter((letter) => letter !== " ")
     .every((letter) => guessedLetters.includes(letter));
 
-    const addGuessedLetter = useCallback(
-      (letter) => {
-        if (guessedLetters.includes(letter) || isLoser || isWinner) return;
-        setGuessedLetters((currentLetters) => [...currentLetters, letter]);
-    
-        if (wordToGuess.includes(letter)) {
-          if (currentSoundId !== "CorrectA" ) {
-            handleSoundEffect("CorrectA");
-          } else if (currentSoundId === "CorrectA") {
-            handleSoundEffect("CorrectB");
-          } else if (currentSoundId === "CorrectB") {
-            handleSoundEffect("CorrectA");
-          }
-        } else {
-          if (currentSoundId !== "WrongA" ) {
-            handleSoundEffect("WrongA");
-          } else if (currentSoundId === "WrongA") {
-            handleSoundEffect("WrongB");
-          } else if (currentSoundId === "WrongB") {
-            handleSoundEffect("WrongA");
-          }
+  const addGuessedLetter = useCallback(
+    (letter) => {
+      if (guessedLetters.includes(letter) || isLoser || isWinner) return;
+      setGuessedLetters((currentLetters) => [...currentLetters, letter]);
+
+      if (wordToGuess.includes(letter)) {
+        if (currentSoundId !== "CorrectA") {
+          handleSoundEffect("CorrectA");
+        } else if (currentSoundId === "CorrectA") {
+          handleSoundEffect("CorrectB");
+        } else if (currentSoundId === "CorrectB") {
+          handleSoundEffect("CorrectA");
         }
-      },
-      [guessedLetters, isWinner, isLoser, currentSoundId]
-    );
-    
+      } else {
+        if (currentSoundId !== "WrongA") {
+          handleSoundEffect("WrongA");
+        } else if (currentSoundId === "WrongA") {
+          handleSoundEffect("WrongB");
+        } else if (currentSoundId === "WrongB") {
+          handleSoundEffect("WrongA");
+        }
+      }
+    },
+    [guessedLetters, isWinner, isLoser, currentSoundId]
+  );
 
   useEffect(() => {
     const rp = randWord(selectedOption);
     setWordToGuess(rp.word.toUpperCase());
     setQuestion(rp.Hint);
-  }, []);
+  }, [level]);
 
   useEffect(() => {
     if (isLoser) {
-      handleBgMusicToggle("Remove");
+      setIsPlaying(false);
+      handleChangeBG("Remove");
       handleSoundEffect("Loser");
       document.querySelector(".cloud_class_level_5").style.animationDirection =
         "reverse";
       document.querySelector(".cloud_class_level_5").style.animationDuration =
         "600ms";
-      setTimeout (() => {
-          openModalLoser();
-      }, 4000) // adjust time for loser modal
-   
-      
+      setTimeout(() => {
+        openModalLoser();
+      }, 4000); // adjust time for loser modal
     }
     if (isWinner) {
-      handleBgMusicToggle("Remove");
+      setIsPlaying(false);
+      handleChangeBG("Remove");
       handleSoundEffect("Winner");
-      setTimeout (() => {
-          openModalWinner();
-      }, 4000) // adjust time for winner modal
-   
+      setTimeout(() => {
+        openModalWinner();
+      }, 4000); // adjust time for winner modal
     }
-  }, [isLoser, isWinner]); 
+  }, [isLoser, isWinner]);
 
   useEffect(() => {
     if (timeRemaining === 10) {
@@ -140,13 +152,13 @@ const GameScreen = () => {
   }, [timeRemaining]);
 
   useEffect(() => {
-  if (isMusicEnabled){
-    handleBgMusicToggle("InGame");
-  }
+    if (isMusicEnabled) {
+      handleBgMusicToggle("InGame");
+    }
     return () => {
-      handleBgMusicToggle(""); 
+      handleBgMusicToggle("");
     };
-  }, [ isMusicEnabled]);
+  }, [isMusicEnabled]);
 
   return (
     <div className="cloud_class_level_5">
@@ -155,12 +167,16 @@ const GameScreen = () => {
         {isWinner ? <Confetti width={width} height={height} /> : null}
         <div className="game-timer">
           <CountdownCircleTimer
-            isPlaying
+            isPlaying={isPlaying}
+            key={key}
             duration={60}
             colors={["#00c127", "#F7B801", "#F7B801", "#A30000", "#A30000"]}
             colorsTime={[60, 30, 20, 10, 0]}
             strokeWidth={12}
             size={100}
+            onComplete={() => {
+              setIsPlaying(false);
+            }}
             strokeLinecap="square"
             rotation="counterclockwise"
           >
@@ -173,7 +189,6 @@ const GameScreen = () => {
               );
             }}
           </CountdownCircleTimer>
-          
         </div>
 
         <div className="Hangman">
@@ -186,14 +201,13 @@ const GameScreen = () => {
                 color: "#AF8B2F",
               }}
             >
-              Number of Balloons : {5 - incorrectLetters.length}
+              Number of Balloons : {numberOfBalloons - incorrectLetters.length}
             </div>
           </div>
 
           <div className="maingrid">
             {/* part1 baloon */}
             <Balloon isLoser={isLoser} img={images[incorrectLetters.length]} />
-
             <div className="questionBox">
               <div>
                 <h2>Hint: {question}</h2>
@@ -233,13 +247,14 @@ const GameScreen = () => {
 
             <WinnerModal
               modalOpenWinner={modalOpenWinner}
-              handleNextStep={handleNextStep}
+              handleNextStep={() => handleNextStep()}
               closeModalWinner={closeModalWinner}
+              level={level}
             />
             <LoserModal
-            modalOpenLoser={modalOpenLoser} 
-            handleNextStep={handleNextStep}
-            closeModalLoser={closeModalLoser}
+              modalOpenLoser={modalOpenLoser}
+              handleNextStep={() => retryButtonFunction()}
+              closeModalLoser={closeModalLoser}
             />
           </div>
         </div>

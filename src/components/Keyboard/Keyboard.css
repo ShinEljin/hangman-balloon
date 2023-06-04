@@ -25,12 +25,33 @@
   pointer-events: none;
   background-color: #737373;
 }
+
+.CorrectLetters {
+  font-weight: 700;
+  background: #cfaa4b;
+  color: black;
+  height: max(35px, 3.2vw);
+  width: max(30px, 3vw);
+  align-items: center;
+  border-radius: 12px;
+  margin: 5px;
+  border: none;
+  font-size: min(2.2rem, 4.5vw);
+  border: 5px solid #813c1c;
+  transition: 100ms all ease;
+}
+
+.CorrectLetters:disabled {
+  pointer-events: none;
+  background-color: #ffe500;
+}
+
 @media only screen and (max-width: 600px) {
   .button-alpha {
     margin: 2px;
   }
   .button-alpha:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
     font-size: x-large;
   }
 }

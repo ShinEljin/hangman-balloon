@@ -1,17 +1,23 @@
-import { useEffect, useState } from "react";
 import { Howl } from "howler";
+import { useEffect, useState } from "react";
 
-import Click from "../../assets/soundFx/SettingsClick.mp3";
-import ClickNext from "../../assets/soundFx/SettingsClick.mp3";
-import ClickPrev from "../../assets/soundFx/SettingsClick.mp3";
-import ClickX from "../../assets/soundFx/SettingsClick.mp3";
-import CorrectA from "../../assets/soundFx/Correct.mp3";
-import CorrectB from "../../assets/soundFx/Correct.mp3";
-import WrongA from "../../assets/soundFx/Wrong.mp3";
-import WrongB from "../../assets/soundFx/Wrong.mp3";
-import Winner from "../../assets/soundFx/Winner.mp3";
-import Loser from "../../assets/soundFx/Loser.mp3";
+import {
+  default as CorrectA,
+  default as CorrectB,
+} from "../../assets/soundFx/Correct.mp3";
 import Countdown from "../../assets/soundFx/CountDown.mp3";
+import Loser from "../../assets/soundFx/Loser.mp3";
+import {
+  default as Click,
+  default as ClickNext,
+  default as ClickPrev,
+  default as ClickX,
+} from "../../assets/soundFx/SettingsClick.mp3";
+import Winner from "../../assets/soundFx/Winner.mp3";
+import {
+  default as WrongA,
+  default as WrongB,
+} from "../../assets/soundFx/Wrong.mp3";
 
 const soundSources = {
   Click: Click,
@@ -45,6 +51,7 @@ export default function SoundEffectPlayer({
   isSoundEnabled,
   musicId,
   isSoundEffectEnabled,
+  isStopAllSounds,
 }) {
   const [sounds, setSounds] = useState({});
   const [playingSounds, setPlayingSounds] = useState([]);
@@ -79,17 +86,19 @@ export default function SoundEffectPlayer({
     if (!isSoundEffectEnabled) {
       stopAllSounds();
     }
-  }, [isSoundEffectEnabled]);
+    if (isStopAllSounds === true) {
+      stopAllSounds();
+    }
+  }, [isSoundEffectEnabled, isStopAllSounds]);
 
   const stopAllSounds = () => {
     playingSounds.forEach((soundId) => {
-      const sound = sounds[musicId];
-      if (sound) {
+      Object.values(sounds).forEach((sound) => {
         sound.stop(soundId);
-      }
+      });
     });
     setPlayingSounds([]);
   };
-  
+
   return null;
 }

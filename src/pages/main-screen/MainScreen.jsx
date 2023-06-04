@@ -4,21 +4,20 @@ import Carl from "../../assets/characters/Carl.png";
 import House from "../../assets/characters/House.png";
 import Kevin from "../../assets/characters/Kevin.png";
 import Russell from "../../assets/characters/Russell.png";
-import CarlClickSfx from "../../assets/soundFx/TANDA.mp3";
 import RussellClickSfx from "../../assets/soundFx/BATA.mp3";
 import BirdClickSfx from "../../assets/soundFx/IBON.mp3";
+import CarlClickSfx from "../../assets/soundFx/TANDA.mp3";
 import "./MainScreen.css";
 
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { BsGearFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import useSound from "use-sound";
+import { soundStateContext } from "../../App";
 import Button from "../../components/Button/Button";
 import SquareButton from "../../components/Button/SquareButton";
 import ModalComponent from "../../components/Modal/ModalComponent";
-import { soundStateContext } from "../../App";
-import { useContext } from "react";
-import useSound from "use-sound";
 
 const useClickSound = (soundFile, cooldown) => {
   const [playSound] = useSound(soundFile);
@@ -40,8 +39,8 @@ export default function MainScreen() {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
-  const { handleSoundEffect } = useContext(soundStateContext);
-
+  const { handleSoundEffect, setIsStopAllSounds } =
+    useContext(soundStateContext);
 
   function openModal(content) {
     setModalContent(content);
@@ -55,21 +54,22 @@ export default function MainScreen() {
 
   const navigateToPreGame = () => {
     navigate("/pre-game");
-
   };
 
   const { handleClick: handleCarlClick } = useClickSound(CarlClickSfx, 700);
-  const { handleClick: handleRussellClick } = useClickSound(RussellClickSfx, 700);
+  const { handleClick: handleRussellClick } = useClickSound(
+    RussellClickSfx,
+    700
+  );
   const { handleClick: handleBirdClick } = useClickSound(BirdClickSfx, 500);
 
-
+  useEffect(() => {
+    setIsStopAllSounds(false);
+  }, []);
 
   return (
-    <div className="cloud__class__1"
-
-    >
-  
-      <div className="app-bg"  >
+    <div className="cloud__class__1">
+      <div className="app-bg">
         <div className="main-wrapper">
           <div className="uplogo">
             <img src={logo} height="350px" alt="Logo" />
@@ -82,7 +82,6 @@ export default function MainScreen() {
               alt="Carl"
               className="carl-imgCharacter"
               onClick={handleCarlClick}
-
             />
           </div>
 
@@ -97,8 +96,6 @@ export default function MainScreen() {
               alt="Kevin"
               className="kevin-imgCharacter"
               onClick={handleBirdClick}
-
-
             />
           </div>
 
@@ -109,7 +106,6 @@ export default function MainScreen() {
               alt="Russell"
               className="russell-imgCharacter"
               onClick={handleRussellClick}
-
             />
           </div>
 
@@ -150,7 +146,6 @@ export default function MainScreen() {
               navigateToPreGame={navigateToPreGame}
               handleSoundEffect={handleSoundEffect}
             />
-        
           </div>
         </div>
       </div>
