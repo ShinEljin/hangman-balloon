@@ -1,6 +1,7 @@
 import "./Keyboard.css";
 
 const KeyboardContainer = ({
+  word,
   inactiveLetters,
   addGuessedLetter,
   activeLetters,
@@ -10,7 +11,6 @@ const KeyboardContainer = ({
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
     ["Z", "X", "C", "V", "B", "N", "M"],
   ];
-  console.log(activeLetters);
   return (
     <>
       {rows.map((row, index) => (
@@ -23,7 +23,7 @@ const KeyboardContainer = ({
                   ? "CorrectLetters"
                   : "button-alpha"
               }
-              onClick={() => addGuessedLetter(letter)}
+              onClick={() => addGuessedLetter(letter, word)}
               disabled={inactiveLetters.includes(letter)}
             >
               {letter}

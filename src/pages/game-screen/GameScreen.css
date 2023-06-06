@@ -36,27 +36,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50%;
+  width: min(70vh, 90%);
   background-color: #c9a852;
   background-image: url("../../assets/woodbg.png");
-  height: 90%;
-
-  border-radius: 65px;
+  border-radius: 20px;
 }
 .questionBox > div {
   background-color: #c9a852;
   padding: 2% 5%;
-  margin: 3.5%;
+  margin: 2.5%;
   width: 88%;
-
-  border-radius: 45px;
-  border: 8px solid #d6be65;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 25px 30px -12px inset,
+  border-radius: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 35px 35px 35px -12px inset,
     rgba(0, 0, 0, 0.3) 0px 18px 25px -25px inset;
 }
 
 .questionBox > div > h2 {
-  font-size: min(2rem, 4.5vw);
+  font-size: min(2rem, 3.5vw);
   color: white;
   text-shadow: -1px 1px 2px #7c5f13, 1px 3px 2px #7c5f13, 1px -1px 0 #7c5f13,
     -1px -1px 0 #7c5f13;
@@ -91,19 +87,14 @@
 .maingrid {
   justify-content: center;
   display: grid;
-  height: 80vh;
+  height: 92vh;
   grid-template-rows: auto auto auto auto;
   grid-template-columns: 100%;
+
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 600px) {
-  .maingrid {
-    justify-content: center;
-    display: grid;
-    grid-template-rows: auto auto auto auto;
-    grid-template-columns: 345px;
-    /* border: red solid; */
-  }
   .words {
     text-align: center;
     display: grid;
@@ -117,6 +108,14 @@
   .button-alpha {
     background-color: #ffffff;
     font-weight: 600;
+  }
+  .questionBox > div {
+    background-color: #c9a852;
+    padding: 2%;
+    margin: 3%;
+  }
+  .maingrid {
+    height: 80vh;
   }
 }
 
@@ -149,8 +148,8 @@
   display: flex;
   flex-direction: column;
   margin-top: 2%;
+  height: 30vh;
 }
 
 .Keyboard-Container > div {
-  height: 50%;
 }

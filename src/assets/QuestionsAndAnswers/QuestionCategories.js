@@ -413,7 +413,7 @@ export default {
       Hint: "The home of the famous Chocolate Hills",
     },
     {
-      word: " Intramuros",
+      word: "Intramuros",
       Hint: "Place in Manila, name from the Spanish word meaning “within walls”",
     },
   ],
