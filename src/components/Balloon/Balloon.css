@@ -22,9 +22,11 @@
   /* position: absolute; */
   animation: parachute 5s ease-out;
   animation-fill-mode: forwards;
+  z-index: 99;
 }
 
-.balloon > img {
+.balloon > img,
+.balloon-home > img {
   -webkit-animation: mover 1s infinite alternate;
   animation: mover 1s infinite alternate;
 }
@@ -50,4 +52,7 @@
   position: relative;
   margin-left: auto;
   margin-right: auto;
+  min-width: 150px;
+  width: 12%;
+  height: auto;
 }

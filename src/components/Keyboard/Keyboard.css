@@ -47,9 +47,12 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .button-alpha {
-    margin: 2px;
+  .button-alpha,
+  .CorrectLetters {
+    margin: 0.5%;
+    border: 4px solid #813c1c;
   }
+
   .button-alpha:hover {
     transform: scale(1.03);
     font-size: x-large;

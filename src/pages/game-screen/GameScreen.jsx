@@ -16,6 +16,7 @@ import step0 from "../../assets/char-state/5_Balloon.png";
 import Arrow from "../../components/Arrow/Arrow";
 import Balloon from "../../components/Balloon/Balloon";
 import Keyboard from "../../components/Keyboard/Keyboard";
+import CompletedModal from "../../components/Modal/CompletedModal";
 import LoserModal from "../../components/Modal/LoserModal";
 import WinnerModal from "../../components/Modal/WinnerModal";
 import Word from "../../components/Word/Word";
@@ -44,17 +45,18 @@ const GameScreen = () => {
   const { selectedOption } = useContext(categoryContext);
   const [modalOpenWinner, setModalOpenWinner] = useState(false);
   const [modalOpenLoser, setModalOpenLoser] = useState(false);
+  const [modalOpenCompleted, setModalOpenCompleted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const [key, setKey] = useState(0);
   const [numberOfBalloons] = useState(5);
 
   const handleNextStep = () => {
     handleChangeBG("InGame");
-    setLevel((prev) => prev + 1);
     setGuessedLetters([]);
     setModalOpenWinner(false);
     setIsPlaying(true);
     setKey((prevKey) => prevKey + 1);
+    setLevel((prev) => prev + 1);
   };
   function openModalWinner() {
     setModalOpenWinner(true);
@@ -75,14 +77,37 @@ const GameScreen = () => {
     navigate("/");
   }
 
+  function openCompletedModal() {
+    setModalOpenCompleted(true);
+  }
+  function closeCompletedModal() {
+    setModalOpenLoser(false);
+    setIsStopAllSounds(true);
+    navigate("/");
+  }
   function retryButtonFunction() {
+    setGuessedLetters([]);
+    setIsPlaying(true);
+    setKey((prevKey) => prevKey + 1);
+    setModalOpenLoser(false);
     console.log("test");
     handleChangeBG("InGame");
-
+    document.querySelector(".cloud_class_level_5").style.animationDirection =
+      "";
+    document.querySelector(".cloud_class_level_5").style.animationDuration = "";
+    var element = document.getElementById("balloon");
+    element.classList.add("balloon");
+    element.classList.remove("balloonafter");
   }
   const incorrectLetters = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
   );
+
+  useEffect(() => {
+    const rp = randWord(selectedOption);
+    setWordToGuess(rp.word.toUpperCase());
+    setQuestion(rp.Hint);
+  }, [level]);
 
   const isLoser = incorrectLetters.length >= 5 || timeRemaining === 0;
   const isWinner = wordToGuess
@@ -91,11 +116,11 @@ const GameScreen = () => {
     .every((letter) => guessedLetters.includes(letter));
 
   const addGuessedLetter = useCallback(
-    (letter) => {
+    (letter, word) => {
       if (guessedLetters.includes(letter) || isLoser || isWinner) return;
       setGuessedLetters((currentLetters) => [...currentLetters, letter]);
 
-      if (wordToGuess.includes(letter)) {
+      if (word.includes(letter)) {
         if (currentSoundId !== "CorrectA") {
           handleSoundEffect("CorrectA");
         } else if (currentSoundId === "CorrectA") {
@@ -117,12 +142,6 @@ const GameScreen = () => {
   );
 
   useEffect(() => {
-    const rp = randWord(selectedOption);
-    setWordToGuess(rp.word.toUpperCase());
-    setQuestion(rp.Hint);
-  }, [level]);
-
-  useEffect(() => {
     if (isLoser) {
       setIsPlaying(false);
       handleChangeBG("Remove");
@@ -133,23 +152,27 @@ const GameScreen = () => {
         "600ms";
       setTimeout(() => {
         openModalLoser();
-      }, 4000); // adjust time for loser modal
+      }, 5000); // adjust time for loser modal
     }
     if (isWinner) {
       setIsPlaying(false);
       handleChangeBG("Remove");
       handleSoundEffect("Winner");
       setTimeout(() => {
-        openModalWinner();
+        if (level !== 5) {
+          openModalWinner();
+        } else {
+          openCompletedModal();
+        }
       }, 4000); // adjust time for winner modal
     }
   }, [isLoser, isWinner]);
 
   useEffect(() => {
-    if (timeRemaining === 10) {
+    if (timeRemaining === 10 && !isWinner) {
       handleSoundEffect("Countdown");
     }
-  }, [timeRemaining]);
+  }, [timeRemaining, isWinner]);
 
   useEffect(() => {
     if (isMusicEnabled) {
@@ -169,7 +192,7 @@ const GameScreen = () => {
           <CountdownCircleTimer
             isPlaying={isPlaying}
             key={key}
-            duration={60}
+            duration={999}
             colors={["#00c127", "#F7B801", "#F7B801", "#A30000", "#A30000"]}
             colorsTime={[60, 30, 20, 10, 0]}
             strokeWidth={12}
@@ -225,6 +248,7 @@ const GameScreen = () => {
             {/* part 3 keypad */}
             <div className="Keyboard-Container">
               <Keyboard
+                word={wordToGuess}
                 removeFromScreen={isWinner || isLoser}
                 activeLetters={guessedLetters.filter((letter) =>
                   wordToGuess.includes(letter)
@@ -255,7 +279,11 @@ const GameScreen = () => {
               modalOpenLoser={modalOpenLoser}
               handleNextStep={() => retryButtonFunction()}
               closeModalLoser={closeModalLoser}
-
+            />
+            <CompletedModal
+              modalOpenCompleted={modalOpenCompleted}
+              closeModalCompleted={closeCompletedModal}
+              level={level}
             />
           </div>
         </div>

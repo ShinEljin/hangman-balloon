@@ -39,8 +39,12 @@ export default function MainScreen() {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
-  const { handleSoundEffect, setIsStopAllSounds, isMusicEnabled, handleChangeBG} =
-    useContext(soundStateContext);
+  const {
+    handleSoundEffect,
+    setIsStopAllSounds,
+    isMusicEnabled,
+    handleChangeBG,
+  } = useContext(soundStateContext);
 
   function openModal(content) {
     setModalContent(content);
@@ -118,7 +122,7 @@ export default function MainScreen() {
             />
           </div>
 
-          <div className="balloon">
+          <div className="balloon-home">
             <img
               src={dogBalloon}
               height="450px"

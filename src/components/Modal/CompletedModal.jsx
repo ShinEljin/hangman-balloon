@@ -4,7 +4,7 @@ import "./Modal.css";
 export default function CompletedModal(props) {
   return (
     <>
-      {props.modalOpen && (
+      {props.modalOpenCompleted && (
         <div className="modal-overlay">
           <div className="modal-dialog">
             <div className="modal-content">
@@ -24,19 +24,17 @@ export default function CompletedModal(props) {
                 <div className="modal-center">
                   <div className="completedModal-content">
                     <div className="completedModal-container">
-                    <div className="completed-textcontent">
-                      <div className="completedModal-msg">
-                        You Won!
+                      <div className="completed-textcontent">
+                        <div className="completedModal-msg">You Won!</div>
+                        <div className="completedModal-submsg">
+                          You Completed Level {props.level}
+                        </div>
                       </div>
-                      <div className="completedModal-submsg">
-                        You Completed Level 5
-                      </div>
-                    </div>
-                    <img
-                      src="/modal-images/CompletedBG.png "
-                      alt="image not found"
-                      className="completedBgImage"
-                    ></img>
+                      <img
+                        src="/modal-images/CompletedBG.png "
+                        alt="image not found"
+                        className="completedBgImage"
+                      ></img>
                     </div>
                   </div>
                 </div>
@@ -50,10 +48,7 @@ export default function CompletedModal(props) {
               </div>
               <div className="modal-footer">
                 <div className="select-container">
-                  <Button
-                    title="Home"
-                   
-                  />
+                  <Button title="Home" onClick={props.closeModalCompleted} />
                 </div>
               </div>
             </div>

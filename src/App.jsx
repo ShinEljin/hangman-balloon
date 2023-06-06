@@ -55,8 +55,6 @@ function App() {
     setCurrentMusicId(musicId);
   };
 
-  console.log(isMusicEffectEnabled)
-
   return (
     <categoryContext.Provider value={selectedOptionObject}>
       <soundStateContext.Provider
@@ -72,7 +70,7 @@ function App() {
           setIsStopAllSounds,
           handleChangeBG,
           isMusicEffectEnabled,
-          setIsMusicEffectEnabled
+          setIsMusicEffectEnabled,
         }}
       >
         {isMusicEnabled && (
