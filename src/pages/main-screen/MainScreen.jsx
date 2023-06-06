@@ -39,7 +39,7 @@ export default function MainScreen() {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
-  const { handleSoundEffect, setIsStopAllSounds } =
+  const { handleSoundEffect, setIsStopAllSounds, isMusicEnabled, handleChangeBG} =
     useContext(soundStateContext);
 
   function openModal(content) {
@@ -55,6 +55,15 @@ export default function MainScreen() {
   const navigateToPreGame = () => {
     navigate("/pre-game");
   };
+
+  useEffect(() => {
+    if (isMusicEnabled) {
+      handleChangeBG("Home");
+    }
+    return () => {
+      handleChangeBG("");
+    };
+  }, [isMusicEnabled]);
 
   const { handleClick: handleCarlClick } = useClickSound(CarlClickSfx, 700);
   const { handleClick: handleRussellClick } = useClickSound(

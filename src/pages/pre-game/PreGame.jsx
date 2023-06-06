@@ -2,14 +2,30 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { useNavigate } from "react-router-dom";
 import "../main-screen/MainScreen.css";
 import "./PreGame.css";
-
+import { useEffect, useContext } from "react";
+import { soundStateContext } from "../../App";
 
 function PreGame() {
+  const {
+    handleChangeBG,
+    isMusicEnabled,
+
+  } = useContext(soundStateContext);
   const navigate = useNavigate();
 
   const onTimerComplete = () => {
     navigate("/game");
   };
+
+
+  useEffect(() => {
+    if (isMusicEnabled) {
+      handleChangeBG("PreGame");
+    }
+    return () => {
+      handleChangeBG("");
+    };
+  }, [isMusicEnabled]);
   
   return (
     <>

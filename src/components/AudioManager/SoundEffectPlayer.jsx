@@ -12,6 +12,8 @@ import {
   default as ClickNext,
   default as ClickPrev,
   default as ClickX,
+  default as ClickSelect,
+  default as ClickSelectB
 } from "../../assets/soundFx/SettingsClick.mp3";
 import Winner from "../../assets/soundFx/Winner.mp3";
 import {
@@ -21,6 +23,8 @@ import {
 
 const soundSources = {
   Click: Click,
+  ClickSelect: ClickSelect,
+  ClickSelectB: ClickSelectB,
   ClickX: ClickX,
   ClickNext: ClickNext,
   ClickPrev: ClickPrev,
@@ -31,11 +35,14 @@ const soundSources = {
   Winner: Winner,
   Loser: Loser,
   Countdown: Countdown,
+  Remove: "",
 };
 
 const soundVolumes = {
   Click: 1,
   ClickX: 1,
+  ClickSelect: 1,
+  ClickSelectB: 1,
   ClickNext: 1,
   ClickPrev: 1,
   CorrectA: 1,

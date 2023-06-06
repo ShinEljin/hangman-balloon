@@ -41,8 +41,8 @@ export default function LoserModal(props) {
               </div>
               <div className="modal-footer">
               <div className="select-container">
-                  <Button title="Home" onClick={() => {  props.closeModalLoser();}} />
-                    <Button title="Retry" onClick={() => {  props.handleNextStep();}} />
+                  <Button title="Home" onClick={() => {  props.closeModalLoser(); }} />
+                    <Button title="Retry" onClick={() => {  props.handleNextStep(); }} />
 
                   </div>
               </div>

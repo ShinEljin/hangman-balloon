@@ -480,6 +480,56 @@
   justify-content: center;
 }
 
+.completedModal-content{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-family: "Jua";
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  color: #ffff;
+  text-shadow: -1px -1px 0 #7C5F13, 1px -1px 0 #7C5F13, -1px 1px 0 #7C5F13, 1px 1px 0 #7C5F13;
+  max-width:  900px;
+  height: 38vh;
+
+
+}
+
+.completedModal-container{
+  width: 720px;
+}
+.completed-textcontent{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.completedModal-msg{
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+.completedModal-submsg{
+
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 30px;
+
+
+
+
+}
+
+.completedBgImage{
+  height: 200px;
+}
+
+
+
+/* To fix responsiveness of modal, adjust the content width of each modal */
 @media (max-width: 800px) {
   .winnerModal-content {
     flex-direction: column;
@@ -537,6 +587,10 @@
   .loserModal-content{
   
     width:  300px;
+  }
+
+  .completedModal-container{
+   width: 420px;
   }
 }
 
