@@ -88,9 +88,8 @@
   justify-content: center;
   display: grid;
   height: 92vh;
-  grid-template-rows: auto auto auto auto;
+  grid-template-rows: 34vh auto auto auto;
   grid-template-columns: 100%;
-
   overflow: hidden;
 }
 
@@ -116,6 +115,7 @@
   }
   .maingrid {
     height: 80vh;
+    grid-template-rows: auto auto auto auto;
   }
 }
 
