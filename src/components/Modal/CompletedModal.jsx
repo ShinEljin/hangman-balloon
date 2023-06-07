@@ -1,4 +1,4 @@
-import Button from "../Button/Button";
+import ButtonModal from "../Button/ButtonModal";
 import "./Modal.css";
 
 export default function CompletedModal(props) {
@@ -48,7 +48,7 @@ export default function CompletedModal(props) {
               </div>
               <div className="modal-footer">
                 <div className="select-container">
-                  <Button title="Home" onClick={props.closeModalCompleted} />
+                  <ButtonModal title="Home" onClick={props.closeModalCompleted} />
                 </div>
               </div>
             </div>

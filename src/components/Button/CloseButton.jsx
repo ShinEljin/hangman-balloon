@@ -1,6 +1,7 @@
 import { IconX } from '@tabler/icons-react';
 import { soundStateContext } from '../../App';
 import { useContext } from 'react';
+
 const CloseButton = (props) => {
 
   const { handleSoundEffect } = useContext(soundStateContext);

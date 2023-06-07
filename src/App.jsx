@@ -23,6 +23,7 @@ function App() {
   const [currentSoundId, setCurrentSoundId] = useState("");
   const [currentMusicId, setCurrentMusicId] = useState("");
   const [isStopAllSounds, setIsStopAllSounds] = useState(false);
+  const [loseStopper, setLoseStopper] = useState(false);
 
   const location = useLocation();
   const routePath = location.pathname;
@@ -55,6 +56,18 @@ function App() {
     setCurrentMusicId(musicId);
   };
 
+  const soundEffectStopper = () => {
+   setIsStopAllSounds(true);
+  };
+
+  const soundEffectEnabler = () => {
+    setIsStopAllSounds(false);
+   };
+ 
+ 
+
+  
+
   return (
     <categoryContext.Provider value={selectedOptionObject}>
       <soundStateContext.Provider
@@ -71,6 +84,9 @@ function App() {
           handleChangeBG,
           isMusicEffectEnabled,
           setIsMusicEffectEnabled,
+          soundEffectStopper,
+          soundEffectEnabler,
+          setLoseStopper,
         }}
       >
         {isMusicEnabled && (
@@ -93,11 +109,13 @@ function App() {
             musicId={currentSoundId}
             isSoundEffectEnabled={isSoundEffectEnabled}
             isStopAllSounds={isStopAllSounds}
+            loseStopper={loseStopper}
           />
         )}
       </soundStateContext.Provider>
     </categoryContext.Provider>
   );
 }
+
 
 export default App;

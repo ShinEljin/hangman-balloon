@@ -1,4 +1,4 @@
-import Button from "../Button/Button";
+import ButtonModal from "../Button/ButtonModal";
 import "./Modal.css";
 
 
@@ -26,7 +26,7 @@ export default function LoserModal(props) {
                 <div className="modal-center-loser">
                   <div className="loserModal-content">
                   <div className="loser-textcontent">
-                      <div  className="loserModal-msg" >You Lose</div>
+                      <div  className="loserModal-msg" >Oops! You run out of balloons</div>
                   </div>
                   </div>
 
@@ -41,8 +41,8 @@ export default function LoserModal(props) {
               </div>
               <div className="modal-footer">
               <div className="select-container">
-                  <Button title="Home" onClick={() => {  props.closeModalLoser(); }} />
-                    <Button title="Retry" onClick={() => {  props.handleNextStep(); }} />
+                  <ButtonModal title="Home" onClick={() => {  props.closeModalLoser(); }} />
+                    <ButtonModal title="Retry" onClick={() => {  props.handleNextStep();  }} />
 
                   </div>
               </div>

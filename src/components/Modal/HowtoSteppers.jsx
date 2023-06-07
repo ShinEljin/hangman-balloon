@@ -1,4 +1,4 @@
-import SquareButton from "../Button/SquareButton";
+import SquareButtonModal from "../Button/SquareButtonModal";
 import { IconContext } from 'react-icons';
 import { GrPrevious, GrNext } from 'react-icons/gr';
 import { soundStateContext } from "../../App";
@@ -51,7 +51,7 @@ export default function HowToStepper(props) {
         }}
       >
         <div className={`stepper-leftside ${currentStep === 1 ? 'stepper-hide' : ''}`}>
-        <SquareButton
+        <SquareButtonModal
           content={<GrPrevious size={30} />}
           onClick={() => {
             handlePreviousClick();
@@ -66,7 +66,7 @@ export default function HowToStepper(props) {
           <p className="stepper-title">Step {currentStep}</p>
         </div>
         <div className={`stepper-rightside ${currentStep === 3 ? 'stepper-hide' : ''}`}>
-        <SquareButton
+        <SquareButtonModal
           content={<GrNext size={30} />}
           onClick={() => {
             handleNextClick();
