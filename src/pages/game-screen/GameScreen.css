@@ -141,7 +141,9 @@
 .game-timer {
   position: absolute;
   top: 20px;
-  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .Keyboard-Container {

@@ -7,6 +7,7 @@ import Confetti from "react-confetti";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { useNavigate } from "react-router-dom";
 import { categoryContext, soundStateContext } from "../../App";
+import balloonNumber from "../../assets/balloon_number.png";
 import step5 from "../../assets/char-state/0_Balloon.png";
 import step4 from "../../assets/char-state/1_Balloon.png";
 import step3 from "../../assets/char-state/2_Balloon.png";
@@ -63,20 +64,17 @@ const GameScreen = () => {
   function openModalWinner() {
     setModalOpenWinner(true);
     soundEffectEnabler();
-
   }
   function closeModalWinner() {
     setModalOpenWinner(false);
     soundEffectStopper();
     navigate("/");
-
   }
 
   function openModalLoser() {
     setModalOpenLoser(true);
     soundEffectEnabler();
     setLoseStopper(false);
-
   }
 
   function closeModalLoser() {
@@ -89,13 +87,12 @@ const GameScreen = () => {
   function openCompletedModal() {
     setModalOpenCompleted(true);
     soundEffectEnabler();
-
   }
   function closeCompletedModal() {
     setModalOpenLoser(false);
     navigate("/");
   }
-  
+
   function retryButtonFunction() {
     setLoseStopper(true);
     setGuessedLetters([]);
@@ -156,7 +153,7 @@ const GameScreen = () => {
   useEffect(() => {
     if (isLoser) {
       setIsPlaying(false);
-  
+
       soundEffectStopper();
       handleChangeBG("Remove");
       handleSoundEffect("Loser");
@@ -184,10 +181,10 @@ const GameScreen = () => {
   }, [isLoser, isWinner]);
 
   useEffect(() => {
-    if (timeRemaining === 10 ) {
+    if (timeRemaining === 10) {
       handleSoundEffect("Countdown");
     }
-    if (isPlaying){
+    if (isPlaying) {
       setLoseStopper(false);
     }
   }, [timeRemaining, isWinner, isPlaying]);
@@ -207,45 +204,69 @@ const GameScreen = () => {
         {/* CONFETTI IF WIN */}
         {isWinner ? <Confetti width={width} height={height} /> : null}
         <div className="game-timer">
-          <CountdownCircleTimer
-            isPlaying={isPlaying}
-            key={key}
-            duration={60}
-            colors={["#00c127", "#F7B801", "#F7B801", "#A30000", "#A30000"]}
-            colorsTime={[60, 30, 20, 10, 0]}
-            strokeWidth={12}
-            size={100}
-            onComplete={() => {
-              setIsPlaying(false);
+          <div
+            className="score"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "80px",
+              height: "100px",
             }}
-            strokeLinecap="square"
-            rotation="counterclockwise"
           >
-            {({ remainingTime }) => {
-              setTimeRemaining(remainingTime);
-              return (
-                <div className="timer">
-                  <div className="value">{remainingTime}</div>
-                </div>
-              );
-            }}
-          </CountdownCircleTimer>
+            <img
+              src={balloonNumber}
+              alt="balloon_number"
+              style={{ width: "100%", height: "100%" }}
+            />
+            <p
+              style={{
+                position: "absolute",
+                fontSize: "2rem",
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
+              x{numberOfBalloons - incorrectLetters.length}
+            </p>
+          </div>
+
+          <div style={{ paddingRight: "10px" }}>
+            <CountdownCircleTimer
+              isPlaying={isPlaying}
+              duration={60}
+              colors={[
+                "#CFAA4B",
+                "#CFAA4B",
+                "#CFAA4B",
+                "#CFAA4B",
+                "#CFAA4B",
+                "#CFAA4B",
+              ]}
+              strokeWidth={12}
+              trailStrokeWidth={16}
+              trailColor="#4F3222"
+              strokeLinecap="square"
+              rotation="counterclockwise"
+              size={100}
+              onComplete={() => {
+                setIsPlaying(false);
+              }}
+              key={key}
+            >
+              {({ remainingTime }) => {
+                setTimeRemaining(remainingTime);
+                return (
+                  <div className="timer">
+                    <div className="value">{remainingTime}</div>
+                  </div>
+                );
+              }}
+            </CountdownCircleTimer>
+          </div>
         </div>
 
         <div className="Hangman">
-          <div className="score">
-            <div
-              style={{
-                fontSize: "30px",
-                textAlign: "left",
-                width: "50%",
-                color: "#AF8B2F",
-              }}
-            >
-              Number of Balloons : {numberOfBalloons - incorrectLetters.length}
-            </div>
-          </div>
-
           <div className="maingrid">
             {/* part1 baloon */}
             <Balloon isLoser={isLoser} img={images[incorrectLetters.length]} />
@@ -274,17 +295,6 @@ const GameScreen = () => {
                 inactiveLetters={guessedLetters}
                 addGuessedLetter={addGuessedLetter}
               />
-              {/* {gameStat === 1 ? (
-                <Arrow stage={"Stage2"} redirect={"stage2"} />
-              ) : gameStat === 0 ? (
-                <h1>You Lost</h1>
-              ) : (
-                <div className="words">{gameStat}</div>
-              )} */}
-              {/* 
-
-
-              {gameStat === 0 ? <> {reset} </> : null} */}
             </div>
 
             <WinnerModal
