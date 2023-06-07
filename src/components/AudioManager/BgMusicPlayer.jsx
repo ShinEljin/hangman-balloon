@@ -23,11 +23,7 @@ const soundSources = {
   },
 };
 
-export default function BgMusicPlayer({
-  isMusicEnabled,
-  musicId,
-  isMusicEffectEnabled,
-}) {
+export default function BgMusicPlayer({ isMusicEnabled, musicId, isMusicEffectEnabled}) {
   const { src, volume } = soundSources[musicId] || {};
 
   const [play, { pause }] = useSound(src, {
@@ -46,32 +42,21 @@ export default function BgMusicPlayer({
   }, []);
 
   useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        // Page is hidden or inactive, pause the music
+    if (isMusicEnabled &&  isMusicEffectEnabled) {
+      if (currentMusicIdRef.current && currentMusicIdRef.current !== musicId) {
         pause();
-      } else {
-        // Page is visible or active, resume or start playing the music
-        if (isMusicEnabled && isMusicEffectEnabled) {
-          if (currentMusicIdRef.current && currentMusicIdRef.current !== musicId) {
-            pause();
-          }
-          currentMusicIdRef.current = musicId;
-          play();
-        } else {
-          pause();
-        }
       }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
+      currentMusicIdRef.current = musicId;
+      play();
+    } else {
+      pause();
+    }
 
     return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
       pause();
       currentMusicIdRef.current = null;
     };
-  }, [isMusicEnabled, musicId, play, pause, isMusicEffectEnabled]);
+  }, [isMusicEnabled, musicId, play, pause,  isMusicEffectEnabled]);
 
   return null;
 }
