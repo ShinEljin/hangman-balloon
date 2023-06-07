@@ -41,9 +41,10 @@ export default function MainScreen() {
   const [modalContent, setModalContent] = useState("");
   const {
     handleSoundEffect,
-    setIsStopAllSounds,
     isMusicEnabled,
     handleChangeBG,
+    setLoseStopper,
+
   } = useContext(soundStateContext);
 
   function openModal(content) {
@@ -77,7 +78,7 @@ export default function MainScreen() {
   const { handleClick: handleBirdClick } = useClickSound(BirdClickSfx, 500);
 
   useEffect(() => {
-    setIsStopAllSounds(false);
+    setLoseStopper(false);
   }, []);
 
   return (

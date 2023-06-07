@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import {
   default as CorrectA,
   default as CorrectB,
+  default as CorrectC,
 } from "../../assets/soundFx/Correct.mp3";
 import Countdown from "../../assets/soundFx/CountDown.mp3";
 import Loser from "../../assets/soundFx/Loser.mp3";
@@ -13,12 +14,13 @@ import {
   default as ClickPrev,
   default as ClickX,
   default as ClickSelect,
-  default as ClickSelectB
+  default as ClickSelectB,
 } from "../../assets/soundFx/SettingsClick.mp3";
 import Winner from "../../assets/soundFx/Winner.mp3";
 import {
   default as WrongA,
   default as WrongB,
+ default as WrongC,
 } from "../../assets/soundFx/Wrong.mp3";
 
 const soundSources = {
@@ -30,8 +32,10 @@ const soundSources = {
   ClickPrev: ClickPrev,
   CorrectA: CorrectA,
   CorrectB: CorrectB,
+  CorrectC: CorrectC,
   WrongA: WrongA,
   WrongB: WrongB,
+  WrongC: WrongC,
   Winner: Winner,
   Loser: Loser,
   Countdown: Countdown,
@@ -59,6 +63,7 @@ export default function SoundEffectPlayer({
   musicId,
   isSoundEffectEnabled,
   isStopAllSounds,
+  loseStopper,
 }) {
   const [sounds, setSounds] = useState({});
   const [playingSounds, setPlayingSounds] = useState([]);
@@ -95,8 +100,11 @@ export default function SoundEffectPlayer({
     }
     if (isStopAllSounds === true) {
       stopAllSounds();
+    } 
+    if (loseStopper == true) {
+      stopLoseSound();
     }
-  }, [isSoundEffectEnabled, isStopAllSounds]);
+  }, [isSoundEffectEnabled, isStopAllSounds, loseStopper]);
 
   const stopAllSounds = () => {
     playingSounds.forEach((soundId) => {
@@ -105,6 +113,13 @@ export default function SoundEffectPlayer({
       });
     });
     setPlayingSounds([]);
+  };
+
+  const stopLoseSound = () => {
+    Object.values(sounds).forEach((sound) => {
+      sound.stop(); // Stop the sound
+    });
+    setPlayingSounds([]); // Clear the playingSounds array
   };
 
   return null;

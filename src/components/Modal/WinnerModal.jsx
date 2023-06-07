@@ -1,4 +1,4 @@
-import Button from "../Button/Button";
+import ButtonModal from "../Button/ButtonModal";
 import "./Modal.css";
 
 export default function WinnerModal(props) {
@@ -53,14 +53,14 @@ export default function WinnerModal(props) {
               </div>
               <div className="modal-footer">
                 <div className="select-container">
-                  <Button
+                  <ButtonModal
                     title="Home"
                     onClick={() => {
                       props.closeModalWinner();
                     }}
                   />
                   {props.level !== 5 ? (
-                    <Button
+                    <ButtonModal
                       title="Next"
                       onClick={() => {
                         props.handleNextStep();

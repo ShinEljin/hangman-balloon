@@ -90,3 +90,103 @@
   padding: 8px;
   background: linear-gradient(0deg, #36241C, #36241C),
 }
+
+/* Select Button on Modal */
+
+.btnModal {
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 10px 40px;
+  font-family: "Jua";
+  background-image: linear-gradient(#b38e33, #dfbd69);
+  display: flex;
+  justify-content: center;  
+}
+
+.btnModal:hover {
+  background-image: linear-gradient(#e0c685, #fae8bc);
+  cursor: pointer;
+}
+
+.innerBtnModal {
+  border-radius: 30px;
+  padding: 8px;
+  background-image: linear-gradient(#e7ca81, #b38e33);
+}
+
+.innerBtnModal:hover {
+  background-image: linear-gradient(#e6d5ac, #f3d589);
+}
+
+.outerBtnModal {
+  border-radius: 40px;
+  padding: 10px;
+  background-color: #452e25;
+  
+}
+
+/* Modal SquareButton */
+
+.outerSquareBtnModal {
+  border-radius: 20px;
+  padding: 5px;
+  background-color: #452e25;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.innerSquareBtnModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1;
+  border-radius: 20px;
+  padding: 8px;
+  background-image: linear-gradient(#e7ca81, #b38e33);
+}
+
+.innerSquareBtnModal:hover {
+  background-image: linear-gradient(#e6d5ac, #f3d589);
+}
+
+.squareBtnModal {
+  width: 38px;
+  aspect-ratio: 1;
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 10px;
+  font-family: "Jua";
+  background-image: linear-gradient(#b38e33, #dfbd69);
+}
+
+.squareBtnModal:hover {
+  background-image: linear-gradient(#e0c685, #fae8bc);
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 800px) {
+  
+.outerBtnModal {
+  width: 80%;
+}
+.btnModal{
+  font-size: 20px;
+  height: 20px;
+}
+
+
+.squareBtnModal {
+  width: 30px;
+  border-radius: 20px;
+  padding: 7px;
+
+}
+
+}

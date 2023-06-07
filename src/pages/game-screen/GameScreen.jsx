@@ -29,8 +29,10 @@ const GameScreen = () => {
     handleSoundEffect,
     currentSoundId,
     isMusicEnabled,
-    setIsStopAllSounds,
     handleChangeBG,
+    soundEffectStopper,
+    soundEffectEnabler,
+    setLoseStopper,
   } = useContext(soundStateContext);
   const [level, setLevel] = useState(1);
 
@@ -60,32 +62,42 @@ const GameScreen = () => {
   };
   function openModalWinner() {
     setModalOpenWinner(true);
+    soundEffectEnabler();
+
   }
   function closeModalWinner() {
-    setIsStopAllSounds(true);
     setModalOpenWinner(false);
+    soundEffectStopper();
     navigate("/");
+
   }
 
   function openModalLoser() {
     setModalOpenLoser(true);
+    soundEffectEnabler();
+    setLoseStopper(false);
+
   }
 
   function closeModalLoser() {
+    setLoseStopper(true);
     setModalOpenLoser(false);
-    setIsStopAllSounds(true);
+    soundEffectStopper();
     navigate("/");
   }
 
   function openCompletedModal() {
     setModalOpenCompleted(true);
+    soundEffectEnabler();
+
   }
   function closeCompletedModal() {
     setModalOpenLoser(false);
-    setIsStopAllSounds(true);
     navigate("/");
   }
+  
   function retryButtonFunction() {
+    setLoseStopper(true);
     setGuessedLetters([]);
     setIsPlaying(true);
     setKey((prevKey) => prevKey + 1);
@@ -144,6 +156,8 @@ const GameScreen = () => {
   useEffect(() => {
     if (isLoser) {
       setIsPlaying(false);
+  
+      soundEffectStopper();
       handleChangeBG("Remove");
       handleSoundEffect("Loser");
       document.querySelector(".cloud_class_level_5").style.animationDirection =
@@ -156,6 +170,7 @@ const GameScreen = () => {
     }
     if (isWinner) {
       setIsPlaying(false);
+      soundEffectStopper();
       handleChangeBG("Remove");
       handleSoundEffect("Winner");
       setTimeout(() => {
@@ -169,10 +184,13 @@ const GameScreen = () => {
   }, [isLoser, isWinner]);
 
   useEffect(() => {
-    if (timeRemaining === 10 && !isWinner) {
+    if (timeRemaining === 10 ) {
       handleSoundEffect("Countdown");
     }
-  }, [timeRemaining, isWinner]);
+    if (isPlaying){
+      setLoseStopper(false);
+    }
+  }, [timeRemaining, isWinner, isPlaying]);
 
   useEffect(() => {
     if (isMusicEnabled) {
@@ -192,7 +210,7 @@ const GameScreen = () => {
           <CountdownCircleTimer
             isPlaying={isPlaying}
             key={key}
-            duration={999}
+            duration={60}
             colors={["#00c127", "#F7B801", "#F7B801", "#A30000", "#A30000"]}
             colorsTime={[60, 30, 20, 10, 0]}
             strokeWidth={12}
@@ -279,6 +297,7 @@ const GameScreen = () => {
               modalOpenLoser={modalOpenLoser}
               handleNextStep={() => retryButtonFunction()}
               closeModalLoser={closeModalLoser}
+              setLoseStopper={setLoseStopper}
             />
             <CompletedModal
               modalOpenCompleted={modalOpenCompleted}

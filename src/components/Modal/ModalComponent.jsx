@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "../Button/Button";
+import ButtonModal from "../Button/ButtonModal";
 import CloseButton from "../Button/CloseButton";
 import CategoriesModalContent from "./CategoriesModalContent";
 import HowtoModalContent from "./HowtoModalContent";
@@ -78,7 +78,7 @@ export default function ModalComponent(props) {
                 )}
                 {props.modalContent === "categories" && (
                   <div className="select-container">
-                    <Button title="Select" onClick={() => { props.handleSoundEffect("ClickX");  props.navigateToPreGame();}} />
+                    <ButtonModal title="Select" onClick={() => { props.handleSoundEffect("ClickX");  props.navigateToPreGame();}} />
                   </div>
                 )}
               </div>
